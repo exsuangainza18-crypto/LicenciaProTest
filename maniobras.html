@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Reglas y Maniobras - LicenciaPro</title>
+  <style>
+    :root { --primary: #6C5CE7; --dark: #2D3436; --light: #F7F9FC; --shadow: 0 4px 15px rgba(0,0,0,0.06); }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background: var(--light); padding: 15px; }
+    .header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; position: sticky; top: 0; background: var(--light); padding: 10px 0; z-index: 10; }
+    .btn-back { background: white; border: 1.5px solid #8e80d4; padding: 10px; border-radius: 12px; width: 45px; height: 45px; cursor: pointer; box-shadow: var(--shadow); font-size: 1.2rem; font-weight: bold; }
+    .title-box h1 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; color: #222; }
+    .title-box p { color: var(--primary); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; }
+    .search-container { position: sticky; top: 65px; background: var(--light); padding-bottom: 12px; z-index: 9; }
+    .search-box { width: 100%; padding: 15px; border-radius: 16px; border: 1.5px solid #ddd; outline: none; font-size: 1rem; box-shadow: var(--shadow); }
+    .art-card { background: white; padding: 20px; border-radius: 18px; margin-bottom: 15px; box-shadow: var(--shadow); border-left: 6px solid var(--primary); }
+    .section-tag { background: #f0eff8; color: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; margin-bottom: 8px; display: inline-block; text-transform: uppercase; }
+    .art-card h3 { color: var(--primary); font-size: 1.05rem; font-weight: 800; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    .art-card p { font-size: 0.95rem; line-height: 1.6; color: #333; text-align: justify; white-space: pre-line; }
+    .no-results { text-align: center; padding: 40px; color: #999; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <button class="btn-back" onclick="window.location.href='../../../../ley109.html'">←</button>
+    <div class="title-box">
+      <p>Categoría 2</p>
+      <h1>Reglas y Maniobras</h1>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="searchArt" class="search-box" placeholder="Busca agente, adelantamiento, alcohol..." onkeyup="filterArt()">
+  </div>
+
+  <div id="art-container"></div>
+
+<script>
+  const articulos = [
+    { n: 60, s: "GENERALIDADES", d: "Los usuarios de la vía tienen los derechos siguientes:\n1) ser tratados de manera respetuosa y cortés por los agentes de la autoridad;\n2) si es conductor de un vehículo, a que el agente se dirija hasta él y lo imponga de los motivos que dieron lugar a su detención;\n3) ser impuestos de los derechos que les asisten a manifestar su inconformidad con la medida de que es objeto, de acuerdo con la ley;\n4) identificar claramente al agente de la autoridad actuante; y que se les realicen por el agente actuante una segunda prueba de alcoholemia por aire espirado, cuando la anterior haya resultado positiva." },
+    { n: 61, s: "GENERALIDADES", d: "Los usuarios de la vía están obligados a:\n1) comportarse de manera respetuosa y cortés, ante los reclamos de los agentes de la autoridad;\n2) llevar consigo y mostrar, cuando se le solicite por un agente de la autoridad, la licencia o permiso de conducción y la licencia o permiso de circulación del vehículo." },
+    { n: 62, s: "PRIORIDADES", d: "Los usuarios de las vías están obligados a observar en el cumplimiento de las reglas del tránsito el orden de prioridad siguiente:\n1) las señales de los agentes de la Policía Nacional Revolucionaria, los reguladores militares del tránsito y los guardacruceros en los pasos a nivel;\n2) las señales que indican régimen de circulación provisional;\n3) las señales mediante luces de los semáforos, sonoras y lumínicas;\n4) las señales verticales; y\n5) las señales horizontales." },
+    { n: 63, s: "SEÑALES DEL AGENTE", d: "Las señales que realiza el agente de la autoridad en la vía son:\n1) “Atención, Alto”, levantando el brazo verticalmente, significa que todos los usuarios de la vía deben detenerse de inmediato;\n2) “Alto”, con uno o los dos brazos extendidos horizontalmente como continuación de su hombro, significa que todos los usuarios de la vía que se encuentren de frente o a su espalda deben detenerse de inmediato." },
+    { n: 65, s: "CIRCULACIÓN", d: "El conductor de cualquier vehículo, al circular por una vía urbana o rural está obligado a:\n1) transitar de acuerdo con el sentido de circulación señalizado en la vía de un solo sentido de dirección;\n2) transitar por el lado derecho del eje central de la vía de acuerdo con el sentido en que circule, en vías de doble sentido de dirección;\n3) mantener el máximo de la velocidad autorizada, cuando circule por la senda o carril de la extrema izquierda." },
+    { n: 69, s: "ACCIDENTES", d: "El conductor de un vehículo implicado en un accidente del tránsito, está obligado a:\n1) dar cuenta de inmediato a la Policía Nacional Revolucionaria en los casos en que resultan personas muertas o lesionadas, y en aquellos en que participe un vehículo estatal;\n2) mantener el vehículo en la posición que resulte del accidente cuando se haya originado la muerte o lesión a alguna persona;\n4) permanecer en el lugar del accidente hasta la llegada de agentes de la PNR." },
+    { n: 72, s: "MOTOS Y CICLOMOTORES", d: "La circulación de las motocicletas y de los ciclomotores por las vías está sujeta a las disposiciones siguientes:\n1) el conductor y los pasajeros, usar casco protector o de seguridad correctamente abrochado;\n3) el transporte de un niño menor de 7 años de edad, en un sidecar y en unión de otra persona de 14 ó más años de edad;\n5) el conductor y los pasajeros, no realizar acrobacias." },
+    { n: 73, s: "TRACCIÓN ANIMAL", d: "Los conductores de vehículos de tracción animal, deben observar las reglas siguientes:\n1) haber cumplido 16 años de edad;\n2) no circular por autopistas;\n3) circular lo más próximo al borde derecho de la vía;\n5) proveer a los animales de anteojeras y de un aditamento para recoger las excretas;\n7) no circular por carreteras durante las horas comprendidas entre el anochecer y el amanecer sin autorización." },
+    { n: 77, s: "MANIOBRAS", d: "Toda persona que conduce un vehículo por una vía, al realizar cualquier maniobra está obligada a accionar las señales de luces de frenado, de marcha atrás, las direccionales e intermitentes, o en su defecto, las de brazo:\n- Disminuir velocidad o parar: brazo inclinado hacia abajo.\n- Doblar a la derecha: brazo en posición vertical hacia arriba.\n- Doblar a la izquierda: brazo extendido en posición horizontal." },
+    { n: 78, s: "PARE Y CEDA EL PASO", d: "El conductor de cualquier vehículo al circular, incorporarse o cruzar una vía, está obligado a:\n1) detener la marcha ante la señal de Pare, cualesquiera que sean las circunstancias de visibilidad, dándole la prioridad a los vehículos que circulan por la vía transversal;\n2) disminuir la velocidad y parar si fuera necesario, ante una señal de Ceda el Paso." },
+    { n: 82, s: "PASO DE PEATONES", d: "El conductor de cualquier vehículo o animal está obligado a detenerlo y ceder el paso, cuando observe a peatones que empiecen a cruzar o se encuentren cruzando la calzada por vías con las marcas tipo cebras o señales del mismo tipo." },
+    { n: 84, s: "CINTURÓN DE SEGURIDAD", d: "El conductor de un vehículo de motor está obligado a utilizar correctamente el cinturón de seguridad y exigir su uso a los pasajeros." },
+    { n: 85, s: "ADELANTAMIENTO", d: "El conductor de un vehículo para adelantar a otro, está obligado a:\n1) comprobar que puede efectuar la maniobra sin ninguna interferencia a los demás vehículos y sin riesgo de accidente;\n2) efectuar el paso o adelantamiento de un vehículo en marcha por la senda izquierda;\n3) después de ejecutada la maniobra, incorporarse de forma segura y gradual a la senda o carril por la que transitaba." },
+    { n: 89, s: "VIRAJES", d: "El conductor de un vehículo, al realizar un viraje o giro, debe proceder en la forma que a continuación se expresa:\n1) si es a la derecha, realizarlo desde el carril de la extrema derecha de la calzada;\n2) si es a la izquierda, realizarlo desde el carril o senda de la extrema izquierda de la calzada." },
+    { n: 91, s: "GIRO EN U", d: "No se autoriza realizar la media vuelta o giro en forma de “U” en los lugares siguientes:\n1) a menos de 150 metros anteriores a la entrada o posteriores a la salida de una curva de visibilidad reducida o cambio de rasante;\n2) en pasos a nivel, puentes, pasos superiores o inferiores e intercambios;\n3) en aquellos lugares donde para efectuarla se vea obligado a retroceder." },
+    { n: 94, s: "ALCOHOL", d: "1) Cuando el conductor de un vehículo bajo los efectos del alcohol, comete una infracción del tránsito se le duplica la multa;\n2) Si se trata de un conductor de vehículo de carga o de transporte colectivo de pasajeros, de un conductor profesional, o de un vehículo perteneciente al sector estatal, además de lo previsto en el inciso anterior, se le suspende la licencia de conducción por el órgano correspondiente del Ministerio del Interior." },
+    { n: 95, s: "ALCOHOL", d: "Se prohíbe ingerir bebidas alcohólicas en los vehículos y su transportación en los compartimientos destinados al conductor y a los pasajeros cuando es evidente que se está consumiendo." },
+    { n: 96, s: "INMOVILIZACIÓN", d: "Los agentes de la Policía Nacional Revolucionaria pueden inmovilizar un vehículo y trasladarlo hacia el lugar destinado para el depósito, al circular por la vía cuando:\na) el conductor no sea titular de licencia de conducción;\nd) el conductor presente manifestaciones que evidencien haber perdido las condiciones físicas y mentales necesarias para conducir;\ne) se niegue a realizar las pruebas que los agentes de la autoridad le indiquen;\na) el vehículo se encuentre estacionado en lugares donde está prohibido hacerlo o donde obstruya la circulación." }
+  ];
+
+  function loadArts(data) {
+    const container = document.getElementById('art-container');
+    if(data.length === 0) {
+      container.innerHTML = '<div class="no-results">No se encontraron artículos que coincidan.</div>';
+      return;
+    }
+    container.innerHTML = data.map(art => `
+      <div class="art-card">
+        <span class="section-tag">${art.s}</span>
+        <h3>ARTÍCULO ${art.n}</h3>
+        <p>${art.d}</p>
+      </div>
+    `).join('');
+  }
+
+  function filterArt() {
+    const q = document.getElementById('searchArt').value.toLowerCase();
+    const filtered = articulos.filter(a => 
+      a.d.toLowerCase().includes(q) || 
+      a.n.toString().includes(q) ||
+      a.s.toLowerCase().includes(q)
+    );
+    loadArts(filtered);
+  }
+
+  loadArts(articulos);
+</script>
+</body>
+</html>

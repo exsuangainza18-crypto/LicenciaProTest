@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Multas y Responsabilidad - LicenciaPro</title>
+  <style>
+    :root { --primary: #6C5CE7; --dark: #2D3436; --light: #F7F9FC; --shadow: 0 4px 15px rgba(0,0,0,0.06); }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background: var(--light); padding: 15px; }
+    .header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; position: sticky; top: 0; background: var(--light); padding: 10px 0; z-index: 10; }
+    .btn-back { background: white; border: 1.5px solid #8e80d4; padding: 10px; border-radius: 12px; width: 45px; height: 45px; cursor: pointer; box-shadow: var(--shadow); font-size: 1.2rem; font-weight: bold; }
+    .title-box h1 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; color: #222; }
+    .title-box p { color: var(--primary); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; }
+    .search-container { position: sticky; top: 65px; background: var(--light); padding-bottom: 12px; z-index: 9; }
+    .search-box { width: 100%; padding: 15px; border-radius: 16px; border: 1.5px solid #ddd; outline: none; font-size: 1rem; box-shadow: var(--shadow); }
+    .art-card { background: white; padding: 20px; border-radius: 18px; margin-bottom: 15px; box-shadow: var(--shadow); border-left: 6px solid #0984e3; }
+    .section-tag { background: #74b9ff; color: #0984e3; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; margin-bottom: 8px; display: inline-block; text-transform: uppercase; }
+    .art-card h3 { color: #0984e3; font-size: 1.05rem; font-weight: 800; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    .art-card p { font-size: 0.95rem; line-height: 1.6; color: #333; text-align: justify; white-space: pre-line; }
+    .no-results { text-align: center; padding: 40px; color: #999; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <button class="btn-back" onclick="window.location.href='../../../../ley109.html'">←</button>
+    <div class="title-box">
+      <p>Categoría 9</p>
+      <h1>Multas y Responsabilidad</h1>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="searchArt" class="search-box" placeholder="Busca multa, apelación, comisión..." onkeyup="filterArt()">
+  </div>
+
+  <div id="art-container"></div>
+
+<script>
+  const articulos = [
+    { n: 305, s: "RESPONSABILIDAD ADMINISTRATIVA", d: "Las infracciones de los preceptos de este Código y sus disposiciones complementarias, se sancionan por vía administrativa, mediante la imposición de multas y medidas preventivas, sin perjuicio de la responsabilidad penal o civil a que hubiere lugar." },
+    { n: 306, s: "SUJETOS RESPONSABLES", d: "La responsabilidad administrativa recae directamente en el autor de la infracción. En caso de que no pueda ser identificado el infractor en el momento de cometerse la contravención, la responsabilidad recae en el poseedor legal o propietario del vehículo." },
+    { n: 307, s: "RECURSOS Y RECLAMACIONES", d: "Contra las notificaciones de multas y la aplicación de medidas preventivas, los infractores pueden interponer Recurso de Apelación ante el Jefe de la Unidad de la Policía Nacional Revolucionaria del municipio donde se cometió la infracción, en el término establecido por la ley." },
+    { n: 308, s: "COMISIONES DE SEGURIDAD VIAL", d: "La Comisión Nacional de Seguridad Vial es el órgano de carácter interministerial encargado de planificar, dirigir y controlar la política de seguridad vial en el país, así como orientar y evaluar las acciones preventivas." },
+    { n: 312, s: "FUNCIONES DE LAS COMISIONES", d: "Corresponde a las comisiones analizar las causas de los accidentes de tránsito y proponer o dictar, según el caso, medidas encaminadas a su reducción y prevención." },
+    { n: 315, s: "COMISIONES PROVINCIALES", d: "En cada provincia y municipio se constituye una Comisión de Seguridad Vial subordinada a su respectivo nivel administrativo y a la Comisión Nacional, para ejecutar y controlar la política vial en su territorio." },
+    { n: 324, s: "PARTICIPACIÓN CIUDADANA", d: "Las comisiones de seguridad vial promueven la participación de las organizaciones de masas, sociales y estudiantiles en la educación vial y la prevención de accidentes del tránsito." }
+  ];
+
+  function loadArts(data) {
+    const container = document.getElementById('art-container');
+    if(data.length === 0) {
+      container.innerHTML = '<div class="no-results">No se encontraron artículos.</div>'; return;
+    }
+    container.innerHTML = data.map(art => `
+      <div class="art-card">
+        <span class="section-tag">${art.s}</span>
+        <h3>ARTÍCULO ${art.n}</h3>
+        <p>${art.d}</p>
+      </div>`).join('');
+  }
+
+  function filterArt() {
+    const q = document.getElementById('searchArt').value.toLowerCase();
+    loadArts(articulos.filter(a => a.d.toLowerCase().includes(q) || a.n.toString().includes(q) || a.s.toLowerCase().includes(q)));
+  }
+
+  loadArts(articulos);
+</script>
+</body>
+</html>

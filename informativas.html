@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Informativas - LicenciaPro</title>
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --dark: #333333;
+            --light: #F7F9FC;
+            --info: #3498db; 
+            --shadow-soft: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: var(--light); color: var(--dark); padding: 15px; }
+
+        .header { text-align: center; margin: 10px 0 20px; }
+        .header h1 { font-size: 1.8rem; font-weight: 900; color: var(--dark); }
+        .header p { color: #666; font-size: 0.9rem; margin-top: 4px; }
+        
+        .btn-back {
+            display: inline-block; background: white; color: var(--primary);
+            padding: 10px 20px; border-radius: 12px; text-decoration: none;
+            font-weight: 800; font-size: 0.9rem; box-shadow: var(--shadow-soft);
+            margin-bottom: 20px; border: 1px solid #eee; transition: transform 0.1s;
+        }
+        .btn-back:active { transform: scale(0.95); }
+
+        .grid-info { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        
+        .info-card {
+            background: white; border-radius: 18px; padding: 18px;
+            box-shadow: var(--shadow-soft); display: flex; align-items: center; gap: 15px;
+            border-left: 4px solid var(--info);
+        }
+        
+        .img-box {
+            width: 75px; height: 75px; background: #eef2f7; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; overflow: hidden;
+        }
+        .img-box img { width: 90%; height: 90%; object-fit: contain; }
+        .img-fallback { font-size: 1.8rem; color: #2980b9; text-align: center; line-height: 1.2; }
+        
+        .info-content { flex-grow: 1; }
+        .info-content h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; color: #222; }
+        .info-content p { font-size: 0.85rem; color: #555; line-height: 1.35; }
+        
+        .law-tag {
+            display: inline-block; background: rgba(52, 152, 219, 0.1);
+            color: var(--info); padding: 4px 8px; border-radius: 6px;
+            font-weight: 800; font-size: 0.75rem; margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="../../../index.html" class="btn-back">⬅ VOLVER AL INICIO</a>
+
+    <div class="header">
+        <h1>Informativas</h1>
+        <p>Servicios e Indicaciones (Grupo E y F)</p>
+    </div>
+
+    <div class="grid-info">
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/socorro.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">🏥<br><span style="font-size:0.5rem">F-1</span></div></div>
+            <div class="info-content"><h3>Puesto de Socorro</h3><p>Indica hospital o centro médico con urgencias.</p><span class="law-tag">F-1</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/taller.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">🛠️<br><span style="font-size:0.5rem">F-2</span></div></div>
+            <div class="info-content"><h3>Auxilio Mecánico</h3><p>Taller de reparaciones cercano.</p><span class="law-tag">F-2</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/telefono.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">📞<br><span style="font-size:0.5rem">F-3</span></div></div>
+            <div class="info-content"><h3>Teléfono Público</h3><p>Disponibilidad de teléfono en la vía.</p><span class="law-tag">F-3</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/servicentro.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⛽<br><span style="font-size:0.5rem">F-4</span></div></div>
+            <div class="info-content"><h3>Servicentro</h3><p>Estación de combustible (Cupet/Oro Negro).</p><span class="law-tag">F-4</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/restaurante.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">🍴<br><span style="font-size:0.5rem">F-7</span></div></div>
+            <div class="info-content"><h3>Restaurante</h3><p>Servicio de alimentación próximo.</p><span class="law-tag">F-7</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/cafeteria.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">☕<br><span style="font-size:0.5rem">F-8</span></div></div>
+            <div class="info-content"><h3>Cafetería</h3><p>Servicio de refrigerio ligero.</p><span class="law-tag">F-8</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/hotel.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">🏨<br><span style="font-size:0.5rem">F-9</span></div></div>
+            <div class="info-content"><h3>Hotel o Motel</h3><p>Lugar de alojamiento cercano.</p><span class="law-tag">F-9</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/campismo.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⛺<br><span style="font-size:0.5rem">F-11</span></div></div>
+            <div class="info-content"><h3>Zona de Campismo</h3><p>Lugar autorizado para acampar.</p><span class="law-tag">F-11</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/interes.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">🏛️<br><span style="font-size:0.5rem">F-14</span></div></div>
+            <div class="info-content"><h3>Lugar de Interés</h3><p>Sitio histórico o turístico importante.</p><span class="law-tag">F-14</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/info.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">ℹ️<br><span style="font-size:0.5rem">F-15</span></div></div>
+            <div class="info-content"><h3>Información Turística</h3><p>Oficina de orientación al viajero.</p><span class="law-tag">F-15</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/parqueo.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">🅿️<br><span style="font-size:0.5rem">F-16</span></div></div>
+            <div class="info-content"><h3>Estacionamiento</h3><p>Lugar permitido para dejar el vehículo.</p><span class="law-tag">F-16</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/omnibus.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">🚌<br><span style="font-size:0.5rem">F-19</span></div></div>
+            <div class="info-content"><h3>Parada de Ómnibus</h3><p>Lugar de detención del transporte público.</p><span class="law-tag">F-19</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/taxi.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">🚕<br><span style="font-size:0.5rem">F-20</span></div></div>
+            <div class="info-content"><h3>Piquera de Taxis</h3><p>Estación de vehículos de alquiler.</p><span class="law-tag">F-20</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/peatones.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">🚶<br><span style="font-size:0.5rem">F-22</span></div></div>
+            <div class="info-content"><h3>Paso de Peatones</h3><p>Zona reglamentada para el cruce peatonal.</p><span class="law-tag">F-22</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/sinsalida.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">🟦<br><span style="font-size:0.5rem">F-24</span></div></div>
+            <div class="info-content"><h3>Vía sin Salida</h3><p>Calle que no tiene continuidad vehicular.</p><span class="law-tag">F-24</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/sentido_unico.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⬆️<br><span style="font-size:0.5rem">E-1</span></div></div>
+            <div class="info-content"><h3>Sentido Único</h3><p>Circulación permitida en una sola dirección.</p><span class="law-tag">E-1</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/residencial.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">🏘️<br><span style="font-size:0.5rem">E-5</span></div></div>
+            <div class="info-content"><h3>Calle Residencial</h3><p>Prioridad para peatones, velocidad máxima 20 km/h.</p><span class="law-tag">E-5</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/autopista.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">🛣️<br><span style="font-size:0.5rem">E-7</span></div></div>
+            <div class="info-content"><h3>Autopista</h3><p>Inicio de vía de alta velocidad y acceso restringido.</p><span class="law-tag">E-7</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/tunel.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">🚇<br><span style="font-size:0.5rem">E-11</span></div></div>
+            <div class="info-content"><h3>Túnel</h3><p>Entrada a un tramo de vía subterráneo.</p><span class="law-tag">E-11</span></div>
+        </div>
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/informativas/aconsejada.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">🟦<br><span style="font-size:0.5rem">E-12</span></div></div>
+            <div class="info-content"><h3>Velocidad Aconsejada</h3><p>Velocidad recomendada para circular con seguridad.</p><span class="law-tag">E-12</span></div>
+        </div>
+    </div>
+</body>
+</html>

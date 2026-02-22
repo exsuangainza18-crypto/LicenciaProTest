@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Reglamentarias - LicenciaPro</title>
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --dark: #333333;
+            --light: #F7F9FC;
+            --danger: #e74c3c; /* Rojo para prohibición */
+            --info: #3498db;   /* Azul para obligación */
+            --shadow-soft: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: var(--light); color: var(--dark); padding: 15px; }
+
+        .header { text-align: center; margin: 10px 0 20px; }
+        .header h1 { font-size: 1.8rem; font-weight: 900; color: var(--dark); }
+        .header p { color: #666; font-size: 0.9rem; margin-top: 4px; }
+        
+        .btn-back {
+            display: inline-block; background: white; color: var(--primary);
+            padding: 10px 20px; border-radius: 12px; text-decoration: none;
+            font-weight: 800; font-size: 0.9rem; box-shadow: var(--shadow-soft);
+            margin-bottom: 20px; border: 1px solid #eee; transition: transform 0.1s;
+        }
+        .btn-back:active { transform: scale(0.95); }
+
+        .section-title { font-size: 1.2rem; font-weight: 800; margin: 25px 0 15px; color: #222; border-bottom: 2px solid #ddd; padding-bottom: 5px; }
+
+        .grid-info { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        
+        .info-card {
+            background: white; border-radius: 18px; padding: 18px;
+            box-shadow: var(--shadow-soft); display: flex; align-items: center; gap: 15px;
+        }
+        .card-prohibicion { border-left: 4px solid var(--danger); }
+        .card-obligacion { border-left: 4px solid var(--info); }
+        
+        .img-box {
+            width: 75px; height: 75px; background: #f0f2f5; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; overflow: hidden;
+        }
+        .img-box img { width: 90%; height: 90%; object-fit: contain; }
+        .img-fallback { font-size: 1.8rem; text-align: center; line-height: 1.2; }
+        
+        .info-content { flex-grow: 1; }
+        .info-content h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; color: #222; }
+        .info-content p { font-size: 0.85rem; color: #555; line-height: 1.35; }
+        
+        .law-tag {
+            display: inline-block; padding: 4px 8px; border-radius: 6px;
+            font-weight: 800; font-size: 0.75rem; margin-top: 8px;
+        }
+        .tag-danger { background: rgba(231, 76, 60, 0.1); color: var(--danger); }
+        .tag-info { background: rgba(52, 152, 219, 0.1); color: var(--info); }
+    </style>
+</head>
+<body>
+
+    <a href="../../../index.html" class="btn-back">⬅ VOLVER AL INICIO</a>
+
+    <div class="header">
+        <h1>Reglamentarias</h1>
+        <p>Prohibición, Restricción y Obligación</p>
+    </div>
+
+    <h2 class="section-title" style="color: var(--danger);">🚫 Grupo C: Prohibición</h2>
+    <div class="grid-info">
+        
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/circulacion_prohibida.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">⭕<br><span style="font-size:0.6rem">C-1</span></div></div>
+            <div class="info-content"><h3>Circulación Prohibida</h3><p>Prohíbe la circulación de toda clase de vehículos en ambos sentidos.</p><span class="law-tag tag-danger">C-1</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/direccion_prohibida.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">⛔<br><span style="font-size:0.6rem">C-2</span></div></div>
+            <div class="info-content"><h3>Dirección Prohibida (No Entre)</h3><p>Prohíbe la entrada. La vía es de sentido contrario (Contravía).</p><span class="law-tag tag-danger">C-2</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/prohibido_izq.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">🚫<br><span style="font-size:0.6rem">C-3</span></div></div>
+            <div class="info-content"><h3>Prohibido Girar a la Izquierda</h3><p>Impide realizar la maniobra de giro hacia la izquierda.</p><span class="law-tag tag-danger">C-3</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/prohibido_der.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">🚫<br><span style="font-size:0.6rem">C-4</span></div></div>
+            <div class="info-content"><h3>Prohibido Girar a la Derecha</h3><p>Impide realizar la maniobra de giro hacia la derecha.</p><span class="law-tag tag-danger">C-4</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/prohibido_u.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">🚫<br><span style="font-size:0.6rem">C-5</span></div></div>
+            <div class="info-content"><h3>Prohibido Virar en 'U'</h3><p>Prohíbe efectuar el giro de 180 grados para cambiar al sentido contrario.</p><span class="law-tag tag-danger">C-5</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/prohibido_adelantar.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">🚫<br><span style="font-size:0.6rem">C-6</span></div></div>
+            <div class="info-content"><h3>Prohibido Adelantar</h3><p>Prohíbe a todos los vehículos de motor adelantar a otro vehículo.</p><span class="law-tag tag-danger">C-6</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/velocidad_max.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">⭕<br><span style="font-size:0.6rem">C-7</span></div></div>
+            <div class="info-content"><h3>Velocidad Máxima</h3><p>Establece el límite de velocidad máxima permitida (en km/h).</p><span class="law-tag tag-danger">C-7</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/prohibido_claxon.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">🔇<br><span style="font-size:0.6rem">C-8</span></div></div>
+            <div class="info-content"><h3>Prohibido Uso del Claxon</h3><p>Prohíbe usar señales acústicas, excepto para evitar accidentes.</p><span class="law-tag tag-danger">C-8</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/prohibido_estacionar.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">🚫<br><span style="font-size:0.6rem">C-9</span></div></div>
+            <div class="info-content"><h3>Prohibido Estacionar</h3><p>Prohíbe el estacionamiento, pero permite la detención momentánea.</p><span class="law-tag tag-danger">C-9</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/prohibido_detenerse.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">❌<br><span style="font-size:0.6rem">C-10</span></div></div>
+            <div class="info-content"><h3>Prohibido Estacionar y Detenerse</h3><p>Prohibición absoluta de estacionamiento y detención en la vía.</p><span class="law-tag tag-danger">C-10</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/prohibido_camiones.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">🚫<br><span style="font-size:0.6rem">C-11a</span></div></div>
+            <div class="info-content"><h3>Prohibido a Vehículos de Carga</h3><p>Prohíbe la entrada a camiones y vehículos de carga.</p><span class="law-tag tag-danger">C-11a</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/prohibido_ciclos.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">🚫<br><span style="font-size:0.6rem">C-11b</span></div></div>
+            <div class="info-content"><h3>Prohibido a Ciclos</h3><p>Prohíbe la circulación de bicicletas y triciclos.</p><span class="law-tag tag-danger">C-11b</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/prohibido_peatones.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">🚫<br><span style="font-size:0.6rem">C-11c</span></div></div>
+            <div class="info-content"><h3>Prohibido a Peatones</h3><p>Prohíbe el tránsito de peatones por esa vía.</p><span class="law-tag tag-danger">C-11c</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/prohibido_traccion.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">🚫<br><span style="font-size:0.6rem">C-11d</span></div></div>
+            <div class="info-content"><h3>Prohibido a Tracción Animal</h3><p>Prohíbe la circulación de vehículos de tracción animal (coches, carretas).</p><span class="law-tag tag-danger">C-11d</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/peso_max.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">⭕<br><span style="font-size:0.6rem">C-14</span></div></div>
+            <div class="info-content"><h3>Peso Máximo Total</h3><p>Prohíbe el paso a vehículos cuyo peso total supere las toneladas indicadas.</p><span class="law-tag tag-danger">C-14</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/altura_max.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">⭕<br><span style="font-size:0.6rem">C-15</span></div></div>
+            <div class="info-content"><h3>Altura Máxima</h3><p>Prohíbe el paso a vehículos que superen la altura máxima indicada en metros.</p><span class="law-tag tag-danger">C-15</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/ancho_max.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">⭕<br><span style="font-size:0.6rem">C-16</span></div></div>
+            <div class="info-content"><h3>Ancho Máximo</h3><p>Prohíbe el paso a vehículos que superen el ancho máximo indicado en metros.</p><span class="law-tag tag-danger">C-16</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/distancia_min.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">⭕<br><span style="font-size:0.6rem">C-17</span></div></div>
+            <div class="info-content"><h3>Distancia Mínima</h3><p>Obliga a mantener con el vehículo de adelante una distancia no inferior a la indicada.</p><span class="law-tag tag-danger">C-17</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/pare_aduana.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#e74c3c;">🛑<br><span style="font-size:0.6rem">C-18</span></div></div>
+            <div class="info-content"><h3>Pare - Control o Aduana</h3><p>Obliga a detenerse en puestos de control policial, peaje o aduana.</p><span class="law-tag tag-danger">C-18</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/fin_velocidad.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#7f8c8d;">⚪<br><span style="font-size:0.6rem">C-19</span></div></div>
+            <div class="info-content"><h3>Fin de Velocidad Máxima</h3><p>Indica el fin de la restricción de velocidad máxima impuesta anteriormente.</p><span class="law-tag" style="background:#eee; color:#555;">C-19</span></div>
+        </div>
+
+        <div class="info-card card-prohibicion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/fin_adelantar.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#7f8c8d;">⚪<br><span style="font-size:0.6rem">C-20</span></div></div>
+            <div class="info-content"><h3>Fin de Prohibición de Adelantar</h3><p>Finaliza la prohibición de adelantamiento en el tramo de la vía.</p><span class="law-tag" style="background:#eee; color:#555;">C-20</span></div>
+        </div>
+
+    </div>
+
+    <h2 class="section-title" style="color: var(--info); margin-top: 30px;">🔵 Grupo D: Obligación</h2>
+    <div class="grid-info">
+        
+        <div class="info-card card-obligacion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/direccion_frente.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#3498db;">⬆️<br><span style="font-size:0.6rem">D-1a</span></div></div>
+            <div class="info-content"><h3>Dirección Obligatoria (Frente)</h3><p>Obliga a seguir exclusivamente de frente en la intersección.</p><span class="law-tag tag-info">D-1a</span></div>
+        </div>
+
+        <div class="info-card card-obligacion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/direccion_izq_der.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#3498db;">⬅️➡️<br><span style="font-size:0.6rem">D-1</span></div></div>
+            <div class="info-content"><h3>Dirección Obligatoria (Giros)</h3><p>Indica la obligación de girar en el sentido que marcan las flechas.</p><span class="law-tag tag-info">D-1</span></div>
+        </div>
+
+        <div class="info-card card-obligacion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/paso_obligatorio.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#3498db;">↘️<br><span style="font-size:0.6rem">D-2</span></div></div>
+            <div class="info-content"><h3>Paso Obligatorio</h3><p>Indica el lado por el que obligatoriamente se debe rebasar un obstáculo.</p><span class="law-tag tag-info">D-2</span></div>
+        </div>
+
+        <div class="info-card card-obligacion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/rotonda_obligatoria.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#3498db;">🔄<br><span style="font-size:0.6rem">D-3</span></div></div>
+            <div class="info-content"><h3>Circulación Giratoria</h3><p>Obliga a circular alrededor del obstáculo en el sentido de las flechas.</p><span class="law-tag tag-info">D-3</span></div>
+        </div>
+
+        <div class="info-card card-obligacion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/velocidad_minima.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#3498db;">🔵<br><span style="font-size:0.6rem">D-4</span></div></div>
+            <div class="info-content"><h3>Velocidad Mínima Obligatoria</h3><p>Obliga a circular a una velocidad igual o superior a la indicada.</p><span class="law-tag tag-info">D-4</span></div>
+        </div>
+
+        <div class="info-card card-obligacion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/via_ciclistas.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#3498db;">🚲<br><span style="font-size:0.6rem">D-5</span></div></div>
+            <div class="info-content"><h3>Vía Exclusiva (Ciclistas)</h3><p>Camino de uso exclusivo y obligatorio para ciclistas.</p><span class="law-tag tag-info">D-5</span></div>
+        </div>
+
+        <div class="info-card card-obligacion">
+            <div class="img-box"><img src="../../img/senales/reglamentarias/via_peatones.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none; color:#3498db;">🚶<br><span style="font-size:0.6rem">D-6</span></div></div>
+            <div class="info-content"><h3>Vía Exclusiva (Peatones)</h3><p>Camino de uso exclusivo y reservado para el tránsito de peatones.</p><span class="law-tag tag-info">D-6</span></div>
+        </div>
+
+    </div>
+
+</body>
+</html>

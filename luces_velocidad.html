@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Luces y Velocidad - LicenciaPro</title>
+  <style>
+    :root { --primary: #6C5CE7; --dark: #2D3436; --light: #F7F9FC; --shadow: 0 4px 15px rgba(0,0,0,0.06); }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background: var(--light); padding: 15px; }
+    .header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; position: sticky; top: 0; background: var(--light); padding: 10px 0; z-index: 10; }
+    .btn-back { background: white; border: 1.5px solid #8e80d4; padding: 10px; border-radius: 12px; width: 45px; height: 45px; cursor: pointer; box-shadow: var(--shadow); font-size: 1.2rem; font-weight: bold; }
+    .title-box h1 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; color: #222; }
+    .title-box p { color: var(--primary); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; }
+    .search-container { position: sticky; top: 65px; background: var(--light); padding-bottom: 12px; z-index: 9; }
+    .search-box { width: 100%; padding: 15px; border-radius: 16px; border: 1.5px solid #ddd; outline: none; font-size: 1rem; box-shadow: var(--shadow); }
+    .art-card { background: white; padding: 20px; border-radius: 18px; margin-bottom: 15px; box-shadow: var(--shadow); border-left: 6px solid var(--primary); }
+    .section-tag { background: #f0eff8; color: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; margin-bottom: 8px; display: inline-block; text-transform: uppercase; }
+    .art-card h3 { color: var(--primary); font-size: 1.05rem; font-weight: 800; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    .art-card p { font-size: 0.95rem; line-height: 1.6; color: #333; text-align: justify; white-space: pre-line; }
+    .no-results { text-align: center; padding: 40px; color: #999; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <button class="btn-back" onclick="window.location.href='../../../../ley109.html'">←</button>
+    <div class="title-box">
+      <p>Categoría 5</p>
+      <h1>Luces y Velocidad</h1>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="searchArt" class="search-box" placeholder="Busca corta, larga, 50, matrícula..." onkeyup="filterArt()">
+  </div>
+
+  <div id="art-container"></div>
+
+<script>
+  const articulos = [
+    { n: 159, s: "USO DE LUCES", d: "Todo vehículo de motor al circular por la vía pública, desde el anochecer hasta el amanecer, o cuando la visibilidad sea insuficiente por causas naturales, debe tener encendido el alumbrado correspondiente." },
+    { n: 160, s: "LUCES LARGAS Y CORTAS", d: "La luz larga se utilizará en carreteras siempre que no deslumbre a otros usuarios. Es obligatorio el cambio a luz corta o de cruce cuando se aproxime un vehículo en sentido contrario, a una distancia no menor de 150 metros." },
+    { n: 165, s: "LUCES DE POSICIÓN", d: "Todo vehículo que se encuentre detenido o estacionado en la calzada o paseo de una vía insuficientemente iluminada, debe mantener encendidas las luces de posición." },
+    { n: 168, s: "CONDICIONES ANORMALES", d: "En condiciones de niebla, lluvia intensa o nubes de polvo, se utilizarán las luces antiniebla o, en su defecto, la luz corta. Está prohibido el uso de la luz larga en estas condiciones si provoca deslumbramiento por reflexión." },
+    { n: 171, s: "LÍMITES DE VELOCIDAD", d: "Los límites generales de velocidad máxima son:\n1) Zonas urbanas: 50 km/h (y 40 km/h en zonas señalizadas).\n2) Caminos de tierra: 60 km/h.\n3) Carreteras: 90 km/h.\n4) Autopistas: 100 km/h." },
+    { n: 175, s: "VELOCIDAD REDUCIDA", d: "El conductor está obligado a reducir la velocidad y si es necesario detener el vehículo en:\n1) Pasos peatonales.\n2) Zonas escolares en días y horas laborables.\n3) Curvas de visibilidad reducida o puentes estrechos." },
+    { n: 180, s: "COMPETENCIAS", d: "Se prohíbe realizar competencias de velocidad (carreras) en la vía pública sin la autorización expresa de la autoridad competente y el cierre oficial de la vía." },
+    { n: 194, s: "SEÑALIZACIÓN DEL VEHÍCULO", d: "Todo vehículo de motor debe portar en su parte delantera y trasera las luces de posición, faros principales, luces de freno (traseras) y de marcha atrás, en correcto estado de funcionamiento." },
+    { n: 196, s: "INDICADORES DE DIRECCIÓN", d: "Es obligatorio que todo automóvil esté provisto de indicadores de dirección de luz intermitente, de color blanco o amarillo selectivo delante, y de color rojo o amarillo selectivo detrás." },
+    { n: 200, s: "PLACAS DE MATRÍCULA", d: "Todo vehículo de motor o remolque debe llevar las chapas de identificación o matrículas establecidas, colocadas en un lugar visible y mantenerlas legibles e iluminadas durante la noche." }
+  ];
+
+  function loadArts(data) {
+    const container = document.getElementById('art-container');
+    if(data.length === 0) {
+      container.innerHTML = '<div class="no-results">No se encontraron artículos.</div>'; return;
+    }
+    container.innerHTML = data.map(art => `
+      <div class="art-card">
+        <span class="section-tag">${art.s}</span>
+        <h3>ARTÍCULO ${art.n}</h3>
+        <p>${art.d}</p>
+      </div>`).join('');
+  }
+
+  function filterArt() {
+    const q = document.getElementById('searchArt').value.toLowerCase();
+    loadArts(articulos.filter(a => a.d.toLowerCase().includes(q) || a.n.toString().includes(q) || a.s.toLowerCase().includes(q)));
+  }
+
+  loadArts(articulos);
+</script>
+</body>
+</html>

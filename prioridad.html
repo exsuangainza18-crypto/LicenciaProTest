@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Prioridad - LicenciaPro</title>
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --dark: #333333;
+            --light: #F7F9FC;
+            --shadow-soft: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: var(--light); color: var(--dark); padding: 15px; }
+
+        .header { text-align: center; margin: 10px 0 20px; }
+        .header h1 { font-size: 1.8rem; font-weight: 900; color: var(--dark); }
+        .header p { color: #666; font-size: 0.9rem; margin-top: 4px; }
+        
+        .btn-back {
+            display: inline-block; background: white; color: var(--primary);
+            padding: 10px 20px; border-radius: 12px; text-decoration: none;
+            font-weight: 800; font-size: 0.9rem; box-shadow: var(--shadow-soft);
+            margin-bottom: 20px; border: 1px solid #eee; transition: transform 0.1s;
+        }
+        .btn-back:active { transform: scale(0.95); }
+
+        .grid-info { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        
+        .info-card {
+            background: white; border-radius: 18px; padding: 18px;
+            box-shadow: var(--shadow-soft); display: flex; align-items: center; gap: 15px;
+        }
+        
+        .img-box {
+            width: 75px; height: 75px; background: #f0f2f5; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; overflow: hidden;
+        }
+        .img-box img { width: 90%; height: 90%; object-fit: contain; }
+        .img-fallback { font-size: 1.8rem; color: #888; text-align: center; line-height: 1.2; }
+        
+        .info-content { flex-grow: 1; }
+        .info-content h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; color: #222; }
+        .info-content p { font-size: 0.85rem; color: #555; line-height: 1.35; }
+        
+        .law-tag {
+            display: inline-block; background: rgba(108,92,231,0.08);
+            color: var(--primary); padding: 4px 8px; border-radius: 6px;
+            font-weight: 800; font-size: 0.75rem; margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="../../../index.html" class="btn-back">⬅ VOLVER AL INICIO</a>
+
+    <div class="header">
+        <h1>Prioridad</h1>
+        <p>Reglas de paso en intersecciones y tramos</p>
+    </div>
+
+    <div class="grid-info">
+        
+        <div class="info-card">
+            <div class="img-box">
+                <img src="../../img/senales/prioridad/pare.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" alt="PARE">
+                <div class="img-fallback" style="display:none;">🛑<br><span style="font-size:0.6rem">R-1</span></div>
+            </div>
+            <div class="info-content">
+                <h3>PARE</h3>
+                <p>Obligación absoluta de detener el vehículo antes de la línea de detención o al llegar a la intersección.</p>
+                <span class="law-tag">Art. 159 - R-1</span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box">
+                <img src="../../img/senales/prioridad/ceda.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" alt="Ceda el Paso">
+                <div class="img-fallback" style="display:none;">🔻<br><span style="font-size:0.6rem">R-2</span></div>
+            </div>
+            <div class="info-content">
+                <h3>Ceda el Paso</h3>
+                <p>Obligación de permitir el paso a los vehículos que circulan por la vía transversal o preferencial.</p>
+                <span class="law-tag">Art. 159 - R-2</span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box">
+                <img src="../../img/senales/prioridad/calzada_prioridad.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" alt="Calzada con Prioridad">
+                <div class="img-fallback" style="display:none;">🔶<br><span style="font-size:0.6rem">R-3</span></div>
+            </div>
+            <div class="info-content">
+                <h3>Calzada con Prioridad</h3>
+                <p>Indica a los conductores que circulan por esta vía que tienen preferencia de paso en las próximas intersecciones.</p>
+                <span class="law-tag">Art. 159 - R-3</span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box">
+                <img src="../../img/senales/prioridad/fin_prioridad.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" alt="Fin de Calzada con Prioridad">
+                <div class="img-fallback" style="display:none;">🔳<br><span style="font-size:0.6rem">R-4</span></div>
+            </div>
+            <div class="info-content">
+                <h3>Fin de Calzada con Prioridad</h3>
+                <p>Indica el punto donde la calzada por la que circulas pierde su preferencia de paso.</p>
+                <span class="law-tag">Art. 159 - R-4</span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box">
+                <img src="../../img/senales/prioridad/prioridad_contrario.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" alt="Prioridad al Sentido Contrario">
+                <div class="img-fallback" style="display:none;">⭕<br><span style="font-size:0.6rem">R-5</span></div>
+            </div>
+            <div class="info-content">
+                <h3>Prioridad al Sentido Contrario</h3>
+                <p>Prohíbe la entrada en un paso estrecho si obliga a detenerse a los vehículos que vienen de frente.</p>
+                <span class="law-tag">Art. 159 - R-5</span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box">
+                <img src="../../img/senales/prioridad/prioridad_respecto.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" alt="Prioridad Respecto al Sentido Contrario">
+                <div class="img-fallback" style="display:none;">🟦<br><span style="font-size:0.6rem">R-6</span></div>
+            </div>
+            <div class="info-content">
+                <h3>Tu Prioridad (Paso Estrecho)</h3>
+                <p>Indica que tienes prioridad de paso en un tramo estrecho sobre los vehículos que circulan en sentido contrario.</p>
+                <span class="law-tag">Art. 159 - R-6</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Vialidad y Señalización - LicenciaPro</title>
+  <style>
+    :root { --primary: #6C5CE7; --dark: #2D3436; --light: #F7F9FC; --shadow: 0 4px 15px rgba(0,0,0,0.06); }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background: var(--light); padding: 15px; }
+    .header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; position: sticky; top: 0; background: var(--light); padding: 10px 0; z-index: 10; }
+    .btn-back { background: white; border: 1.5px solid #8e80d4; padding: 10px; border-radius: 12px; width: 45px; height: 45px; cursor: pointer; box-shadow: var(--shadow); font-size: 1.2rem; font-weight: bold; }
+    .title-box h1 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; color: #222; }
+    .title-box p { color: var(--primary); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; }
+    .search-container { position: sticky; top: 65px; background: var(--light); padding-bottom: 12px; z-index: 9; }
+    .search-box { width: 100%; padding: 15px; border-radius: 16px; border: 1.5px solid #ddd; outline: none; font-size: 1rem; box-shadow: var(--shadow); }
+    .art-card { background: white; padding: 20px; border-radius: 18px; margin-bottom: 15px; box-shadow: var(--shadow); border-left: 6px solid var(--primary); }
+    .section-tag { background: #f0eff8; color: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; margin-bottom: 8px; display: inline-block; text-transform: uppercase; }
+    .art-card h3 { color: var(--primary); font-size: 1.05rem; font-weight: 800; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    .art-card p { font-size: 0.95rem; line-height: 1.6; color: #333; text-align: justify; white-space: pre-line; }
+    .no-results { text-align: center; padding: 40px; color: #999; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <button class="btn-back" onclick="window.location.href='../../../../ley109.html'">←</button>
+    <div class="title-box">
+      <p>Categoría 1</p>
+      <h1>Vialidad y Señalización</h1>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="searchArt" class="search-box" placeholder="Busca artículo, vía, señal..." onkeyup="filterArt()">
+  </div>
+
+  <div id="art-container"></div>
+
+<script>
+  const articulos = [
+    { n: 1, s: "PRECEPTOS GENERALES", d: "La presente Ley se denomina Código de Seguridad Vial y tiene como objetivo regular integralmente la actividad vial y del tránsito, establecer sus principios básicos y definir en relación con esta materia las funciones de los ministerios del Transporte y del Interior como sus organismos rectores, las responsabilidades de los organismos e instituciones en ella referidos, y la estructura y funciones de las comisiones de seguridad vial." },
+    { n: 2, s: "PRECEPTOS GENERALES", d: "La Seguridad Vial es un sistema integral que comprende el conjunto de actividades, funciones e instituciones jurídicas, íntimamente vinculadas entre sí, que tiene como finalidad el máximo aprovechamiento y duración de las inversiones, y el desplazamiento fluido, seguro y eficiente de vehículos y peatones en las vías." },
+    { n: 3, s: "PRECEPTOS GENERALES", d: "Lo relativo a las vías férreas se rige por leyes especiales, excepto los casos que específicamente se señalan en este Código." },
+    { n: 4, s: "PRECEPTOS GENERALES", d: "A los efectos de la mejor interpretación, comprensión, cumplimiento y aplicación de los preceptos de este Código, se establece un glosario de términos y definiciones que se anexa como parte integrante de esta Ley." },
+    { n: 5, s: "PLANIFICACIÓN VIAL", d: "El Esquema Vial es la representación de las vías del país, muestra la forma que alcanza la red vial nacional a corto, mediano y largo plazo, considera las líneas de desarrollo previstas en los estudios de ordenamiento territorial y sirve de base para los planes de inversiones viales. Su elaboración y actualización corresponden al Ministerio del Transporte." },
+    { n: 6, s: "PLANIFICACIÓN VIAL", d: "El Ministerio del Transporte norma y controla la ejecución del inventario vial, determina la clasificación de las vías en atención a su función, según los documentos técnicos normativos, y mantiene actualizada la red vial de interés nacional." },
+    { n: 7, s: "PLANIFICACIÓN VIAL", d: "La ejecución del inventario vial está a cargo de la autoridad administrativa de la vía." },
+    { n: 8, s: "CLASIFICACIÓN DE VÍAS", d: "Las vías atendiendo a su ubicación se clasifican en:\n1) urbanas, cuando están dentro de zonas urbanas; y\n2) rurales, cuando están fuera de los perímetros urbanos." },
+    { n: 9, s: "CLASIFICACIÓN DE VÍAS", d: "Las vías atendiendo al interés socioeconómico se clasifican en:\n1) nacionales, aquellas que tienen un interés nacional, con independencia de su ubicación geográfica;\n2) provinciales, las que tienen un interés para la provincia en que estén enmarcadas, salvo que hayan sido clasificadas como nacionales;\n3) municipales, las que tienen un interés para el municipio en que estén enmarcadas, y no estén clasificadas como nacionales o provinciales; y\n4) de interés específico, aquellas requeridas por órganos y organismos del Estado y Gobierno, empresas y otras entidades para el desarrollo de su labor." },
+    { n: 10, s: "CLASIFICACIÓN DE VÍAS", d: "Corresponde al Ministerio del Transporte determinar las vías de interés nacional. Los consejos de la administración provinciales del Poder Popular y del Municipio Especial Isla de la Juventud determinan en su territorio las vías de interés provincial, municipal o específico, según corresponda. Las vías no clasificadas como de interés nacional y que enlacen dos o más provincias, se clasifican por el Ministerio del Transporte, en coordinación con los respectivos consejos de la administración provinciales del Poder Popular." },
+    { n: 11, s: "AUTORIDAD ADMINISTRATIVA", d: "La autoridad administrativa es el órgano, organismo o entidad que atiende las vías, de acuerdo con la clasificación basada en su interés socioeconómico, por lo que corresponde:\n1) al Ministerio del Transporte, las vías nacionales;\n2) al Consejo de la Administración Provincial del Poder Popular, las vías provinciales;\n3) al Consejo de la Administración Municipal del Poder Popular, las vías municipales; y\n4) a la entidad determinada, las vías de interés específico." },
+    { n: 12, s: "AUTORIDAD ADMINISTRATIVA", d: "La autoridad administrativa tiene la obligación de proteger y mantener en buen estado las vías que le han sido asignadas y en tal sentido planifica en su presupuesto los recursos requeridos para ello." },
+    { n: 13, s: "AUTORIDAD ADMINISTRATIVA", d: "La autoridad administrativa, en consulta con los ministerios del Transporte y del Interior:\n1) puede reordenar los accesos e intersecciones existentes con el objeto de mejorar la explotación y seguridad de las vías;\n2) autoriza la ejecución de los nuevos accesos a las vías y el reordenamiento de las intersecciones. El proyecto de intersecciones debe poseer las características que se correspondan con las normas establecidas para la vía a que se incorpore." },
+    { n: 14, s: "AUTORIDAD ADMINISTRATIVA", d: "La autoridad administrativa, de conjunto con los ministerios del Interior y del Transporte, puede limitar la circulación de vehículos, en zonas urbanas, en vías, tramos de estas, días y horas, por razones que afecten la circulación del tránsito, la seguridad de las vías u otras. Determina las vías en las que por razones justificadas, se necesite en forma temporal o permanente, restringir la circulación pública a vehículos y peatones. Cuando se requiera limitar la circulación por una vía de forma urgente, por razones relacionadas con la defensa y el orden interior, se ejecuta de inmediato por el Ministerio del Interior." },
+    { n: 15, s: "AUTORIDAD ADMINISTRATIVA", d: "La autoridad administrativa de las vías de interés específico puede restringir o limitar la circulación por estas, previa autorización del Consejo de la Administración del Poder Popular, correspondiente." },
+    { n: 16, s: "PROYECTO Y CONSTRUCCIÓN", d: "El proyecto para la construcción vial se elabora a partir de la tarea de proyección de acuerdo con el reglamento del proceso inversionista, los documentos técnico normativos y de conformidad con el plan nacional de inversiones viales." },
+    { n: 17, s: "PROYECTO Y CONSTRUCCIÓN", d: "Además de los aspectos técnicos de trazado, el proyecto vial incluye el diseño de los accesos y de las intersecciones a la vía proyectada y la señalización, previa consulta a los ministerios del Transporte y del Interior." },
+    { n: 18, s: "PROYECTO Y CONSTRUCCIÓN", d: "Son inversionistas en la construcción de nuevas vías:\n1) el Ministerio del Transporte, en las vías de interés nacional;\n2) los Consejos de la Administración del Poder Popular en las vías de interés provincial o municipal, según corresponda;\n3) la autoridad administrativa correspondiente en las vías de interés específico y;\n4) otras entidades autorizadas, excepcionalmente, por el Consejo de Ministros." },
+    { n: 19, s: "PROYECTO Y CONSTRUCCIÓN", d: "El Ministerio de la Construcción elabora o aprueba el proyecto y construye las vías rurales y urbanas que por su complejidad técnica, requieren de su participación." },
+    { n: 20, s: "RECONSTRUCCIÓN VIAL", d: "Por reconstrucción se entiende el tipo de obra de explotación que se aplica como consecuencia de la variación en la composición o aumento de la intensidad del tránsito, cuando este supera los límites establecidos para la categoría de la vía en cuestión." },
+    { n: 21, s: "RECONSTRUCCIÓN VIAL", d: "La reconstrucción comprende la modificación desde la subrasante o terreno de cimentación hasta todo el pavimento, para adecuar la capacidad y la resistencia del conjunto a las normas que corresponden a una categoría de vía superior a la existente, con los consiguientes cambios geométricos y estructurales. La reconstrucción incluye cuantos componentes de la vía sean necesarios para alcanzar las normas de la categoría de la vía superior." },
+    { n: 22, s: "RECONSTRUCCIÓN VIAL", d: "Son inversionistas de las obras de reconstrucción:\n1) el Ministerio del Transporte, en las vías de interés nacional;\n2) los Consejos de la Administración del Poder Popular en las vías de interés provincial o municipal, según corresponda;\n3) la autoridad administrativa correspondiente, en las vías de interés específico; y\n4) otras entidades autorizadas, excepcionalmente, por el Consejo de Ministros." },
+    { n: 23, s: "RECONSTRUCCIÓN VIAL", d: "Los proyectos y ejecución de las reconstrucciones de las vías rurales y urbanas de mayor complejidad técnica, requieren la aprobación y participación del Ministerio de la Construcción." },
+    { n: 24, s: "RECONSTRUCCIÓN VIAL", d: "Toda obra de construcción y reconstrucción vial debe incluir un estudio de impacto ambiental. El Ministerio de Ciencia, Tecnología y Medio Ambiente, como órgano rector en la materia, es el organismo autorizado a entregar la licencia ambiental de las obras viales mencionadas." },
+    { n: 25, s: "CONSERVACIÓN VIAL", d: "Las obras de conservación se realizan para subsanar los deterioros progresivos y normales originados por la explotación de la vía, la acción de la naturaleza o el hombre. Tienen como objetivo mantener la vía en el estado en que fue construida, sin modificar de forma extensa o generalizada el diseño original de la obra. Por su complejidad se dividen en obras de reparación y de mantenimiento." },
+    { n: 26, s: "CONSERVACIÓN VIAL", d: "La reparación es la obra de conservación que tiene como objetivo subsanar las destrucciones ocurridas en la vía durante el proceso de explotación." },
+    { n: 27, s: "CONSERVACIÓN VIAL", d: "Para su mejor planificación, organización, ejecución y control, la reparación se subdivide en capital, media y corriente. El alcance de cada tipo se determina por los documentos técnicos normativos y tiene las implicaciones financieras que de estas se deriven." },
+    { n: 28, s: "CONSERVACIÓN VIAL", d: "El mantenimiento es la obra de conservación que tiene como objetivo el cuidado sistemático y preventivo de todas las estructuras viales e incluye la señalización, para evitar su deterioro prematuro. Durante su ejecución el pavimento no sufre modificación alguna como estructura vial." },
+    { n: 29, s: "CONSERVACIÓN VIAL", d: "Las obras de reparación y mantenimiento son ejecutadas por la persona jurídica contratada por el organismo, órgano o entidad subordinada a la autoridad administrativa correspondiente, o por esta cuando proceda, de conformidad con las disposiciones legales vigentes." },
+    { n: 30, s: "CONSERVACIÓN VIAL", d: "Para realizar obras de reparación total o parcial en la vía, instalaciones, reparaciones y mantenimientos de redes técnicas, u otras que la afecten se requiere, previamente:\n1) obtener de la autoridad competente la licencia de obra;\n2) obtener el permiso o autorización del cierre parcial o total;\n3) situar las señales y adoptar las medidas de protección correspondientes. Cuando las obras son de carácter urgente, se comunican de inmediato al órgano encargado." },
+    { n: 31, s: "CONSERVACIÓN VIAL", d: "Los consejos de la administración provinciales y municipales del Poder Popular, conforme a sus respectivas competencias, supervisan la ejecución de las obras a que se refiere el artículo anterior y garantizan la necesaria coordinación." },
+    { n: 32, s: "AFECTACIONES PERMANENTES", d: "En las vías urbanas y rurales se establece una faja de emplazamiento, que consiste en una franja de terreno destinada a su construcción y posterior conservación, dentro de la cual no puede haber ningún tipo de edificación u obstáculo que la afecte." },
+    { n: 33, s: "AFECTACIONES PERMANENTES", d: "En las vías rurales, su ancho está determinado por la suma del ancho de cada uno de los elementos componentes de la vía, los que se establecen mediante los documentos técnicos normativos. En las vías urbanas, su ancho se establece conforme a lo establecido en los documentos técnicos normativos." },
+    { n: 34, s: "AFECTACIONES PERMANENTES", d: "Se establecen servidumbres sobre las franjas de terrenos laterales de las vías rurales, para las instalaciones de las redes técnicas, limitadas interiormente por el borde exterior de la franja de emplazamiento de la vía y exteriormente por una línea paralela a dicho borde." },
+    { n: 35, s: "AFECTACIONES PERMANENTES", d: "En las vías urbanas se establece una zona de servidumbre para la instalación de las redes, cuya medida, ubicación, dentro de la faja de la vía y demás características, se precisan en los documentos técnicos normativos." },
+    { n: 36, s: "AFECTACIONES PERMANENTES", d: "Las instalaciones de redes técnicas a que se refieren los artículos anteriores requieren la previa aprobación de la autoridad administrativa." },
+    { n: 37, s: "AFECTACIONES TEMPORALES", d: "Para la construcción, reconstrucción, reparación y mantenimiento de las vías, el inversionista puede utilizar, con carácter provisional, previa autorización y convenio con el perjudicado y su compensación económica cuando proceda, los terrenos circundantes para depósito de materiales de construcción, excavaciones, explotación de canteras, ejecución de caminos de acceso hasta estos últimos, y para desvíos que faciliten el tránsito mientras duren los trabajos a realizar." },
+    { n: 38, s: "AFECTACIONES TEMPORALES", d: "Si el perjudicado a que se refiere el artículo anterior, no otorgase la autorización correspondiente, el inversionista puede recurrir ante el Consejo de la Administración Provincial del Poder Popular." },
+    { n: 39, s: "AFECTACIONES TEMPORALES", d: "Cuando se produce una interrupción en la circulación de vehículos en una vía y es necesario restablecerla de inmediato por razones de seguridad nacional o interés social, el Consejo de la Administración Municipal del Poder Popular en cuya demarcación ocurrió la interrupción puede, bajo su responsabilidad, autorizar el cruce provisional por otro terreno, y queda obligado a comunicarlo antes de las veinticuatro horas siguientes a su poseedor legal o propietario." },
+    { n: 40, s: "AFECTACIONES TEMPORALES", d: "En caso de daños a terrenos, deben adoptarse las medidas para su rehabilitación posterior." },
+    { n: 41, s: "AFECTACIONES TEMPORALES", d: "La utilización provisional de terrenos a que se refieren los artículos precedentes no debe exceder el tiempo previamente pactado por las partes, transcurrido el cual son devueltos al propietario o poseedor legal en condiciones de ser utilizados conforme al destino que anteriormente tenían. Si los terrenos no pueden volver a su destino anterior, la autoridad administrativa compensa al poseedor legal o propietario, por los daños y perjuicios que se le ocasione." },
+    { n: 42, s: "AFECTACIONES TEMPORALES", d: "La autoridad administrativa elimina todo aquello que afecte la vía o que impide su visibilidad; los gastos corresponden al que ocasiona la afectación." },
+    { n: 43, s: "PROTECCIÓN Y DEFENSA", d: "Con el fin de proteger y defender las vías queda prohibido:\n1) dañar las vías y cualesquiera de sus componentes, y alterar su forma;\n2) romper o alterar las defensas, cercas, o cualquier otro componente de la vía;\n3) no restaurar las vías dañadas o alteradas;\n4) recoger, raspar o tomar tierra dentro de la faja de la vía;\n5) impedir el libre curso de las aguas;\n6) conducir ganado a pastar o abrevar y permitir su permanencia en la faja de emplazamiento;\n7) abrir canales, zanjas o hacer cualquier excavación en terrenos limítrofes a menos de tres metros;\n8) depositar materiales que afectan su uso;\n9) arrastrar objetos que rayen el pavimento;\n10) transitar en tractores o máquinas de estera por vías pavimentadas;\n11) construir accesos a autopistas no previstos;\n12) destruir, dañar o sustraer señales;\n13) instalar señales no autorizadas;\n14) sembrar árboles en áreas verdes de visibilidad;\n15) mantener árboles o yerbas cuyo crecimiento rebase 10 cm en zonas de visibilidad;\n16) sembrar árboles u obstáculos dentro de la faja de emplazamiento en vías rurales;\n17) cualquier otro acto o conducta que atente contra las vías." },
+    { n: 44, s: "PROTECCIÓN Y DEFENSA", d: "Sin la previa autorización de la autoridad administrativa queda también prohibido:\n1) modificar o alterar las características de las vías;\n2) podar o cortar árboles u ornamentación de la vía;\n3) utilizar la vía con un fin distinto;\n4) ejecutar accesos o derivaciones a nivel;\n5) hacer obras o depósitos sobre la faja de la vía;\n6) transitar vehículos con exceso de peso;\n7) instalar anuncios, avisos o advertencias mediante vallas." },
+    { n: 45, s: "PROTECCIÓN Y DEFENSA", d: "Se exceptúan del cumplimiento de las prohibiciones establecidas en este capítulo a los órganos de la defensa en ocasión de las actividades que se realizan en interés de la defensa nacional, por catástrofe o desastre natural." },
+    { n: 46, s: "PROTECCIÓN Y DEFENSA", d: "La autoridad administrativa está responsabilizada con el control del crecimiento de cualquier tipo de plantaciones que pueden dañar la vía o limitar la visibilidad." },
+    { n: 47, s: "PROTECCIÓN Y DEFENSA", d: "Los usuarios y entidades que tienen a su cargo la administración de embalses, tanques o depósitos... están obligados a impedir que, al utilizar las aguas u otras sustancias, estas se expandan sobre la vía o puedan dañarlas." },
+    { n: 48, s: "PROTECCIÓN Y DEFENSA", d: "Las personas naturales o jurídicas están obligadas a comunicar a la autoridad administrativa correspondiente cualquier peligro para la seguridad del tránsito derivado del mal estado de las edificaciones que ocupen o en que residan." },
+    { n: 49, s: "INGENIERÍA DE TRÁNSITO", d: "La ingeniería de tránsito comprende los estudios sistemáticos y la señalización vial, y a través de estos interviene en el diseño y la planificación vial. El Ministerio del Interior dirige la actividad de la ingeniería de tránsito." },
+    { n: 50, s: "INGENIERÍA DE TRÁNSITO", d: "Los estudios sistemáticos son las premisas del diseño y la señalización, constituyen medios auxiliares de la planificación vial y permiten mantener actualizados los índices e indicadores requeridos para efectuar las correcciones necesarias al tránsito y a las vías." },
+    { n: 51, s: "INGENIERÍA DE TRÁNSITO", d: "Los estudios sistemáticos comprenden entre otros:\n1) de velocidad;\n2) de volúmenes de tránsito;\n3) de demoras en intersecciones;\n4) sobre capacidad;\n5) sobre seguridad de la vía;\n6) de kilometrajes e inventario vial;\n7) sobre levantamientos topográficos." },
+    { n: 52, s: "INGENIERÍA DE TRÁNSITO", d: "La metodología para la preparación, organización, ejecución, evaluación y aplicación de los estudios sistemáticos en materia de ingeniería de tránsito se determina mediante disposiciones establecidas en los documentos técnicos normativos." },
+    { n: 53, s: "INGENIERÍA DE TRÁNSITO", d: "De conformidad con los documentos técnicos normativos, la autoridad administrativa correspondiente puede realizar estudios sistemáticos, previa conciliación con el órgano especializado de Ingeniería de Tránsito." },
+    { n: 54, s: "INGENIERÍA DE TRÁNSITO", d: "Sin perjuicio de lo anterior, los organismos rectores pueden ejecutar estudios sistemáticos en cualquier vía." },
+    { n: 55, s: "INGENIERÍA DE TRÁNSITO", d: "Otras entidades pueden realizar estudios sistemáticos con fines de investigación científica previa autorización del Ministerio del Interior." },
+    { n: 56, s: "INGENIERÍA DE TRÁNSITO", d: "Las regulaciones generales y la metodología para la elaboración y ejecución del diseño según las condiciones de la vía, intensidad del tránsito y otras circunstancias relativas a la circulación, se establecen de conformidad con los documentos técnicos normativos." },
+    { n: 57, s: "INGENIERÍA DE TRÁNSITO", d: "Los ministerios del Transporte y del Interior proponen a la autoridad administrativa la ejecución de las soluciones viales en función de una mejor organización del tránsito." },
+    { n: 58, s: "SEÑALIZACIÓN", d: "Los dispositivos de señalización se clasifican en señales:\n1) mediante luces: conjunto de dispositivos eléctricos a colores;\n2) verticales: placas y dispositivos de diferentes formas geométricas y colores;\n3) horizontales: marcas hechas con pintura en el pavimento;\n4) sonoras: sonidos emitidos por vehículos en circulación y en pasos a nivel." },
+    { n: 59, s: "SEÑALIZACIÓN", d: "Las condiciones y circunstancias que indican la necesidad de instalar un semáforo, su posición y altura, la determinación de sus fases, y las dimensiones y ubicación de las señales verticales y horizontales, son resultado de un estudio y proyecto elaborado por el órgano especializado en Ingeniería de Tránsito, de conformidad con los documentos técnicos normativos. Se exceptúan las necesidades temporales determinadas por la seguridad del tránsito." }
+  ];
+
+  function loadArts(data) {
+    const container = document.getElementById('art-container');
+    if(data.length === 0) {
+      container.innerHTML = '<div class="no-results">No se encontraron artículos que coincidan con tu búsqueda.</div>';
+      return;
+    }
+    container.innerHTML = data.map(art => `
+      <div class="art-card">
+        <span class="section-tag">${art.s}</span>
+        <h3>ARTÍCULO ${art.n}</h3>
+        <p>${art.d}</p>
+      </div>
+    `).join('');
+  }
+
+  function filterArt() {
+    const q = document.getElementById('searchArt').value.toLowerCase();
+    const filtered = articulos.filter(a => 
+      a.d.toLowerCase().includes(q) || 
+      a.n.toString().includes(q) ||
+      a.s.toLowerCase().includes(q)
+    );
+    loadArts(filtered);
+  }
+
+  loadArts(articulos);
+</script>
+</body>
+</html>

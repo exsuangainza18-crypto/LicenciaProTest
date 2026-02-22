@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Preventivas - LicenciaPro</title>
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --dark: #333333;
+            --light: #F7F9FC;
+            --warning: #f1c40f; 
+            --shadow-soft: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: var(--light); color: var(--dark); padding: 15px; }
+
+        .header { text-align: center; margin: 10px 0 20px; }
+        .header h1 { font-size: 1.8rem; font-weight: 900; color: var(--dark); }
+        .header p { color: #666; font-size: 0.9rem; margin-top: 4px; }
+        
+        .btn-back {
+            display: inline-block; background: white; color: var(--primary);
+            padding: 10px 20px; border-radius: 12px; text-decoration: none;
+            font-weight: 800; font-size: 0.9rem; box-shadow: var(--shadow-soft);
+            margin-bottom: 20px; border: 1px solid #eee; transition: transform 0.1s;
+        }
+        .btn-back:active { transform: scale(0.95); }
+
+        .grid-info { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        
+        .info-card {
+            background: white; border-radius: 18px; padding: 18px;
+            box-shadow: var(--shadow-soft); display: flex; align-items: center; gap: 15px;
+            border-left: 4px solid var(--warning); 
+        }
+        
+        .img-box {
+            width: 75px; height: 75px; background: #fffcf0; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; overflow: hidden; border: 1px solid #f1c40f;
+        }
+        .img-box img { width: 90%; height: 90%; object-fit: contain; }
+        .img-fallback { font-size: 1.8rem; color: #d35400; text-align: center; line-height: 1.2; }
+        
+        .info-content { flex-grow: 1; }
+        .info-content h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; color: #222; }
+        .info-content p { font-size: 0.85rem; color: #555; line-height: 1.35; }
+        
+        .law-tag {
+            display: inline-block; background: rgba(241, 196, 15, 0.15);
+            color: #d35400; padding: 4px 8px; border-radius: 6px;
+            font-weight: 800; font-size: 0.75rem; margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="../../../index.html" class="btn-back">⬅ VOLVER AL INICIO</a>
+
+    <div class="header">
+        <h1>Preventivas</h1>
+        <p>Advierten sobre peligros en la vía (Grupo A)</p>
+    </div>
+
+    <div class="grid-info">
+        
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/curva_izq.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-1a</span></div></div>
+            <div class="info-content"><h3>Curva a la Izquierda</h3><p>Proximidad de una curva pronunciada a la izquierda.</p><span class="law-tag">A-1a</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/curva_der.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-1b</span></div></div>
+            <div class="info-content"><h3>Curva a la Derecha</h3><p>Proximidad de una curva pronunciada a la derecha.</p><span class="law-tag">A-1b</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/curvas_izq.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-2a</span></div></div>
+            <div class="info-content"><h3>Curvas Sucesivas (Izq.)</h3><p>Sucesión de curvas peligrosas, la primera a la izquierda.</p><span class="law-tag">A-2a</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/curvas_der.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-2b</span></div></div>
+            <div class="info-content"><h3>Curvas Sucesivas (Der.)</h3><p>Sucesión de curvas peligrosas, la primera a la derecha.</p><span class="law-tag">A-2b</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/bajada.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-3</span></div></div>
+            <div class="info-content"><h3>Bajada Peligrosa</h3><p>Pendiente descendente fuerte. Obliga a reducir la marcha.</p><span class="law-tag">A-3</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/subida.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-4</span></div></div>
+            <div class="info-content"><h3>Subida Peligrosa</h3><p>Pendiente ascendente de fuerte inclinación.</p><span class="law-tag">A-4</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/estrechamiento.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-5</span></div></div>
+            <div class="info-content"><h3>Estrechamiento</h3><p>La vía se reduce o estrecha por uno o ambos lados.</p><span class="law-tag">A-5</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/puente_movil.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-6</span></div></div>
+            <div class="info-content"><h3>Puente Móvil</h3><p>Proximidad a un puente que puede ser levantado o girado.</p><span class="law-tag">A-6</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/interseccion.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-7</span></div></div>
+            <div class="info-content"><h3>Intersección de Vías</h3><p>Cruce de vías. Se aplican las reglas de prioridad de la derecha.</p><span class="law-tag">A-7</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/interseccion_prioridad.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-8</span></div></div>
+            <div class="info-content"><h3>Intersección con Prioridad</h3><p>Cruce donde tienes la prioridad sobre las vías transversales.</p><span class="law-tag">A-8</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/rotonda.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-9</span></div></div>
+            <div class="info-content"><h3>Circulación Giratoria</h3><p>Proximidad a una rotonda o intersección con giro continuo.</p><span class="law-tag">A-9</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/viento.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-10</span></div></div>
+            <div class="info-content"><h3>Viento Lateral</h3><p>Zona frecuente de vientos fuertes laterales que pueden desviar el vehículo.</p><span class="law-tag">A-10</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/semaforo.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-11</span></div></div>
+            <div class="info-content"><h3>Semáforo</h3><p>Proximidad a una intersección regulada por semáforos.</p><span class="law-tag">A-11</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/vuelo.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-12</span></div></div>
+            <div class="info-content"><h3>Vuelo Rasante</h3><p>Proximidad a aeropuerto. Peligro por ruido o aviones a baja altura.</p><span class="law-tag">A-12</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/ciclistas.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-13</span></div></div>
+            <div class="info-content"><h3>Ciclistas</h3><p>Paso frecuente de ciclistas o proximidad a una ciclovía.</p><span class="law-tag">A-13</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/peatones.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-14</span></div></div>
+            <div class="info-content"><h3>Paso de Peatones</h3><p>Advierte la proximidad de un cruce peatonal señalizado o paso frecuente.</p><span class="law-tag">A-14</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/escolares.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-15</span></div></div>
+            <div class="info-content"><h3>Zona Escolar</h3><p>Peligro por niños. Obligatorio reducir a 40 km/h o menos.</p><span class="law-tag">A-15</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/tractores.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-16</span></div></div>
+            <div class="info-content"><h3>Maquinaria Agrícola</h3><p>Zona de tránsito frecuente de tractores y equipos agrícolas lentos.</p><span class="law-tag">A-16</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/animales.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-17</span></div></div>
+            <div class="info-content"><h3>Animales en la Vía</h3><p>Peligro de invasión de la calzada por ganado o animales de tracción.</p><span class="law-tag">A-17</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/obras.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-18</span></div></div>
+            <div class="info-content"><h3>Obras en la Vía</h3><p>Peligro por trabajos de reparación y hombres en la calzada.</p><span class="law-tag">A-18</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/resbaladizo.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-19</span></div></div>
+            <div class="info-content"><h3>Pavimento Resbaladizo</h3><p>Tramo donde el pavimento puede resultar muy deslizante.</p><span class="law-tag">A-19</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/gravilla.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-20</span></div></div>
+            <div class="info-content"><h3>Proyección de Gravilla</h3><p>Peligro por piedras sueltas que pueden ser proyectadas por las ruedas.</p><span class="law-tag">A-20</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/dos_sentidos.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-21</span></div></div>
+            <div class="info-content"><h3>Circulación en Ambos Sentidos</h3><p>Una vía de sentido único pasa a tener circulación en ambas direcciones.</p><span class="law-tag">A-21</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/resalto.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-22</span></div></div>
+            <div class="info-content"><h3>Perfil Irregular (Resalto)</h3><p>Baches, badenes o reductores de velocidad en la vía.</p><span class="law-tag">A-22</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/derrumbe.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-23</span></div></div>
+            <div class="info-content"><h3>Derrumbe</h3><p>Peligro de desprendimiento de rocas o piedras sobre la calzada.</p><span class="law-tag">A-23</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/muelle.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-24</span></div></div>
+            <div class="info-content"><h3>Muelle o Malecón</h3><p>La vía desemboca en un muelle o río (peligro de caída al agua).</p><span class="law-tag">A-24</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/tren_barrera.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-26</span></div></div>
+            <div class="info-content"><h3>Paso a Nivel con Barrera</h3><p>Cruce de tren protegido con barreras o semibarreras.</p><span class="law-tag">A-26</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/tren_sin_barrera.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-27</span></div></div>
+            <div class="info-content"><h3>Paso a Nivel sin Barrera</h3><p>Cruce de tren sin barrera. Extremar precaución y mirar a ambos lados.</p><span class="law-tag">A-27</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/cruz_san_andres.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-28</span></div></div>
+            <div class="info-content"><h3>Cruz de San Andrés</h3><p>Posición exacta del cruce férreo. Detenerse obligatoriamente si viene el tren.</p><span class="law-tag">A-28</span></div>
+        </div>
+
+        <div class="info-card">
+            <div class="img-box"><img src="../../img/senales/preventivas/otros_peligros.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="img-fallback" style="display:none;">⚠️<br><span style="font-size:0.6rem">A-30</span></div></div>
+            <div class="info-content"><h3>Otros Peligros</h3><p>Señal general para advertir de peligros que no tienen un símbolo específico asignado.</p><span class="law-tag">A-30</span></div>
+        </div>
+
+    </div>
+
+</body>
+</html>

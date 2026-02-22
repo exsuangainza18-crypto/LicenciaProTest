@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Somatón y Chapas - LicenciaPro</title>
+  <style>
+    :root { --primary: #6C5CE7; --dark: #2D3436; --light: #F7F9FC; --shadow: 0 4px 15px rgba(0,0,0,0.06); }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background: var(--light); padding: 15px; }
+    .header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; position: sticky; top: 0; background: var(--light); padding: 10px 0; z-index: 10; }
+    .btn-back { background: white; border: 1.5px solid #8e80d4; padding: 10px; border-radius: 12px; width: 45px; height: 45px; cursor: pointer; box-shadow: var(--shadow); font-size: 1.2rem; font-weight: bold; }
+    .title-box h1 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; color: #222; }
+    .title-box p { color: var(--primary); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; }
+    .search-container { position: sticky; top: 65px; background: var(--light); padding-bottom: 12px; z-index: 9; }
+    .search-box { width: 100%; padding: 15px; border-radius: 16px; border: 1.5px solid #ddd; outline: none; font-size: 1rem; box-shadow: var(--shadow); }
+    .art-card { background: white; padding: 20px; border-radius: 18px; margin-bottom: 15px; box-shadow: var(--shadow); border-left: 6px solid var(--primary); }
+    .section-tag { background: #f0eff8; color: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; margin-bottom: 8px; display: inline-block; text-transform: uppercase; }
+    .art-card h3 { color: var(--primary); font-size: 1.05rem; font-weight: 800; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    .art-card p { font-size: 0.95rem; line-height: 1.6; color: #333; text-align: justify; white-space: pre-line; }
+    .no-results { text-align: center; padding: 40px; color: #999; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <button class="btn-back" onclick="window.location.href='../../../../ley109.html'">←</button>
+    <div class="title-box">
+      <p>Categoría 7</p>
+      <h1>Somatón y Chapas</h1>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="searchArt" class="search-box" placeholder="Busca revisión, chapa, decomiso..." onkeyup="filterArt()">
+  </div>
+
+  <div id="art-container"></div>
+
+<script>
+  const articulos = [
+    { n: 203, s: "CONTROL TÉCNICO", d: "El control técnico de los vehículos tiene por objeto garantizar que estos reúnan las exigencias técnicas en función de la seguridad del tránsito, la protección de las vías, el medio ambiente y el ahorro de energía." },
+    { n: 204, s: "PARÁMETROS", d: "Se determinan los parámetros técnicos para cada vehículo que garanticen el buen estado de elementos que influyen en la seguridad: frenos, dirección, ruedas, luces, motor, transmisión, parabrisas, espejos y claxon." },
+    { n: 205, s: "OBLIGACIÓN", d: "El poseedor legal de un vehículo está obligado a someterlo a inspección y revisión técnica a fin de verificar el cumplimiento de las normas técnicas y de seguridad." },
+    { n: 207, s: "INSPECCIÓN TÉCNICA", d: "Consiste en comprobar si un vehículo reúne los requisitos técnicos mínimos para su circulación. Incluye la verificación de documentos y los datos registrales." },
+    { n: 209, s: "RETENCIÓN Y PLAZOS", d: "Si el vehículo no reúne los requisitos, el Ministerio del Interior puede ocupar la licencia de circulación y las chapas. Concede al poseedor un término de hasta dos años para solucionar las deficiencias técnicas que impiden su circulación." },
+    { n: 211, s: "PLANTAS DE REVISIÓN", d: "La revisión técnica está a cargo del Ministerio del Transporte y se realiza en plantas de revisión con equipamiento especializado (Somatón)." },
+    { n: 212, s: "CERTIFICADO", d: "La planta de revisión emite certificado de revisión técnica. Si se detectan problemas mecánicos que puedan poner en riesgo la seguridad vial, se prohíbe la circulación del vehículo." },
+    { n: 213, s: "PROHIBICIÓN", d: "No pueden circular por las vías los vehículos que no estén provistos del certificado de revisión técnica debidamente actualizado y emitido conforme a los requisitos establecidos." },
+    { n: 215, s: "REGISTRO DE VEHÍCULOS", d: "El Registro tiene como objetivo la inscripción y el control de los vehículos de motor, remolques y semirremolques. La actividad registral está a cargo del Ministerio del Interior." },
+    { n: 216, s: "FUNCIONES DEL REGISTRO", d: "Corresponde al Registro:\n1) inscribir y mantener actualizado el registro de vehículos;\n2) realizar las inspecciones;\n3) otorgar la licencia de circulación y las chapas de identificación." }
+  ];
+
+  function loadArts(data) {
+    const container = document.getElementById('art-container');
+    if(data.length === 0) {
+      container.innerHTML = '<div class="no-results">No se encontraron artículos.</div>'; return;
+    }
+    container.innerHTML = data.map(art => `
+      <div class="art-card">
+        <span class="section-tag">${art.s}</span>
+        <h3>ARTÍCULO ${art.n}</h3>
+        <p>${art.d}</p>
+      </div>`).join('');
+  }
+
+  function filterArt() {
+    const q = document.getElementById('searchArt').value.toLowerCase();
+    loadArts(articulos.filter(a => a.d.toLowerCase().includes(q) || a.n.toString().includes(q) || a.s.toLowerCase().includes(q)));
+  }
+
+  loadArts(articulos);
+</script>
+</body>
+</html>

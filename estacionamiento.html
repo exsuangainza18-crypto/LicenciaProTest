@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Detención y Parqueo - LicenciaPro</title>
+  <style>
+    :root { --primary: #6C5CE7; --dark: #2D3436; --light: #F7F9FC; --shadow: 0 4px 15px rgba(0,0,0,0.06); }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background: var(--light); padding: 15px; }
+    .header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; position: sticky; top: 0; background: var(--light); padding: 10px 0; z-index: 10; }
+    .btn-back { background: white; border: 1.5px solid #8e80d4; padding: 10px; border-radius: 12px; width: 45px; height: 45px; cursor: pointer; box-shadow: var(--shadow); font-size: 1.2rem; font-weight: bold; }
+    .title-box h1 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; color: #222; }
+    .title-box p { color: var(--primary); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; }
+    .search-container { position: sticky; top: 65px; background: var(--light); padding-bottom: 12px; z-index: 9; }
+    .search-box { width: 100%; padding: 15px; border-radius: 16px; border: 1.5px solid #ddd; outline: none; font-size: 1rem; box-shadow: var(--shadow); }
+    .art-card { background: white; padding: 20px; border-radius: 18px; margin-bottom: 15px; box-shadow: var(--shadow); border-left: 6px solid var(--primary); }
+    .section-tag { background: #f0eff8; color: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; margin-bottom: 8px; display: inline-block; text-transform: uppercase; }
+    .art-card h3 { color: var(--primary); font-size: 1.05rem; font-weight: 800; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    .art-card p { font-size: 0.95rem; line-height: 1.6; color: #333; text-align: justify; white-space: pre-line; }
+    .no-results { text-align: center; padding: 40px; color: #999; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <button class="btn-back" onclick="window.location.href='../../../../ley109.html'">←</button>
+    <div class="title-box">
+      <p>Categoría 3</p>
+      <h1>Detención y Parqueo</h1>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="searchArt" class="search-box" placeholder="Busca pendiente, túnel, estacionamiento..." onkeyup="filterArt()">
+  </div>
+
+  <div id="art-container"></div>
+
+<script>
+  const articulos = [
+    { n: 102, s: "ESTACIONAMIENTO", d: "El conductor que estacione un vehículo debe aplicar el freno de mano o seguridad. Si el vehículo queda estacionado en pendiente ascendente (cuesta arriba), debe aplicar la primera velocidad y girar el volante del timón en sentido contrario al contén. Si queda en pendiente descendente (cuesta abajo), debe aplicar la marcha atrás y girar el volante hacia el contén de manera tal que, de desplazarse, las ruedas topen con este." },
+    { n: 106, s: "DETENCIÓN", d: "El conductor de un vehículo no debe abrir las puertas que controla hasta que el vehículo se encuentre completamente detenido, ni emprender la marcha hasta cerciorarse de que todos los pasajeros han terminado de subir o bajar y las puertas están cerradas." },
+    { n: 110, s: "PROHIBICIONES", d: "Se prohíbe estacionar un vehículo en los lugares siguientes:\n1) donde se obstruya la visibilidad de las señales del tránsito;\n2) a menos de cinco metros de una esquina o de la intersección de dos vías;\n3) en puentes, túneles, pasos a nivel e intercambios;\n4) obstruyendo entradas de garaje o pasos de peatones." },
+    { n: 122, s: "VÍAS ESTRECHAS", d: "Cuando los tramos de vías o partes de carreteras no permiten el cruce de dos vehículos en marcha, el conductor del vehículo que circula por la bajada o declive está obligado a ceder el paso a los que circulan en sentido contrario." },
+    { n: 123, s: "TÚNELES", d: "Se prohíbe la circulación a vehículos por los túneles que:\n1) transportan materias tóxicas, inflamables o explosivas; y\n2) no son capaces de alcanzar y mantener una velocidad de 60 kilómetros por hora." }
+  ];
+
+  function loadArts(data) {
+    const container = document.getElementById('art-container');
+    if(data.length === 0) {
+      container.innerHTML = '<div class="no-results">No se encontraron artículos.</div>'; return;
+    }
+    container.innerHTML = data.map(art => `
+      <div class="art-card">
+        <span class="section-tag">${art.s}</span>
+        <h3>ARTÍCULO ${art.n}</h3>
+        <p>${art.d}</p>
+      </div>`).join('');
+  }
+
+  function filterArt() {
+    const q = document.getElementById('searchArt').value.toLowerCase();
+    loadArts(articulos.filter(a => a.d.toLowerCase().includes(q) || a.n.toString().includes(q) || a.s.toLowerCase().includes(q)));
+  }
+
+  loadArts(articulos);
+</script>
+</body>
+</html>

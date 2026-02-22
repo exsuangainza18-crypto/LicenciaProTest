@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Simulacro Gratis - LicenciaPro</title>
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --dark: #333333;
+            --light: #F4F6F9;
+            --shadow-soft: 0 4px 15px rgba(0,0,0,0.04);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: var(--light); color: var(--dark); padding: 15px; }
+
+        .header-quiz { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-weight: 800; color: var(--primary); }
+        .btn-exit { background: white; border: 1px solid #ddd; padding: 8px 15px; border-radius: 10px; color: #666; text-decoration: none; font-size: 0.8rem; }
+
+        .q-img-container { width: 100%; border-radius: 14px; overflow: hidden; margin-bottom: 15px; border: 2px solid #E6EEF6; background: #fff; display: none; }
+        .q-img-container img { width: 100%; display: block; object-fit: contain; max-height: 200px; }
+        
+        .question-text { font-size: 1.25rem; font-weight: 800; margin-bottom: 20px; line-height: 1.3; }
+        
+        .option-btn { width: 100%; background: white; border: 2px solid #E6EEF6; padding: 16px; border-radius: 14px; text-align: left; font-weight: 700; margin-bottom: 10px; cursor: pointer; font-size: 15px; color: var(--dark); transition: 0.2s; }
+        .option-btn.selected { border-color: var(--primary); background: rgba(108,92,231,0.08); }
+        
+        .btn-confirm { background: var(--primary); color: white; border: none; width: 100%; padding: 18px; border-radius: 15px; font-weight: 800; display: none; margin-top: 10px; cursor: pointer; }
+
+        .error-card { background: white; border: 2px solid #ff7675; padding: 15px; border-radius: 14px; text-align: left; margin-bottom: 15px; box-shadow: var(--shadow-soft); }
+        .error-card h4 { color: #d63031; margin-bottom: 8px; font-size: 1rem;}
+        .law-tag { display: inline-block; background: #eef2f5; color: var(--primary); padding: 4px 8px; border-radius: 6px; font-weight: 800; font-size: 0.8rem; margin-top: 5px;}
+        
+        .results-screen { text-align: center; padding: 20px 5px; }
+        .btn-purple { background: #706fd3; color: white; border: none; width: 100%; padding: 18px; border-radius: 16px; font-size: 1.1rem; font-weight: 800; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="quiz-container">
+        <div class="header-quiz">
+            <a href="../../index.html" class="btn-exit">✖ SALIR</a>
+            <span>Simulacro Gratis</span>
+            <span><span id="q-num">1</span>/20</span>
+        </div>
+
+        <div id="q-img-box" class="q-img-container">
+            <img id="q-image" src="" onerror="this.parentElement.style.display='none'">
+        </div>
+
+        <div id="q-text" class="question-text"></div>
+        <div id="options-container"></div>
+        
+        <button id="btn-confirm" class="btn-confirm" onclick="handleNext()">CONFIRMAR RESPUESTA</button>
+    </div>
+
+    <script>
+        const quizGratis = {
+            questions: [
+                { p: "¿Quién tiene la prioridad en esta intersección sin señales?", o: ["El azul", "El rojo", "El que viene por la derecha"], c: 2, l: "Art. 128", e: "En intersecciones no señalizadas, la derecha tiene la preferencia de paso.", img: "../preguntas/pregunta_1.jpg" },
+                { p: "¿Qué indica el agente si le da la espalda?", o: ["Vía libre", "Pare o Detención", "Giro a la derecha"], c: 1, l: "Art. 63.2", e: "La espalda del agente significa detención inmediata (Pare).", img: "../preguntas/pregunta_2.jpg" },
+                { p: "¿Cuál es el límite de velocidad máxima general en zonas urbanas?", o: ["40 km/h", "50 km/h", "60 km/h"], c: 1, l: "Art. 171.1", e: "La velocidad máxima en zona urbana es 50 km/h.", img: "../preguntas/pregunta_3.jpg" },
+                { p: "¿A qué distancia se cambia de luz larga a corta?", o: ["50 m", "100 m", "150 m"], c: 2, l: "Art. 160", e: "El cambio se hace a no menos de 150 metros.", img: "../preguntas/pregunta_4.jpg" },
+                { p: "¿Qué prohíbe una línea continua longitudinal?", o: ["Adelantar cruzando la línea.", "Estacionar.", "Exceder los 50 km/h."], c: 0, l: "Señales Horizontales", e: "No puede ser traspasada para adelantar.", img: "../preguntas/pregunta_5.jpg" },
+                { p: "¿Tasa de alcohol para conductores noveles?", o: ["0.0 g/l", "0.5 g/l", "0.8 g/l"], c: 0, l: "Art. 288.1", e: "La ley exige tolerancia cero (0.0).", img: "../preguntas/pregunta_6.jpg" },
+                { p: "Ante señal de 'Ceda el Paso' debe:", o: ["Parar siempre.", "Disminuir y parar si es necesario.", "Acelerar."], c: 1, l: "Art. 78.2", e: "Solo para si viene un vehículo por la vía transversal.", img: "../preguntas/pregunta_7.jpg" },
+                { p: "Estacionar cuesta abajo requiere:", o: ["Primera marcha.", "Marcha atrás y timón al contén.", "Neutro."], c: 1, l: "Art. 102", e: "Se usa marcha atrás y ruedas hacia el contén.", img: "../preguntas/pregunta_8.jpg" },
+                { p: "¿Distancia mínima de esquina para estacionar?", o: ["2 m", "5 m", "10 m"], c: 1, l: "Art. 110.2", e: "El mínimo legal son 5 metros.", img: "../preguntas/pregunta_9.jpg" },
+                { p: "Prioridad en rotonda:", o: ["El que entra.", "El que ya circula dentro.", "El más pesado."], c: 1, l: "Art. 130", e: "Los que ya están dentro tienen preferencia.", img: "../preguntas/pregunta_10.jpg" },
+                { p: "¿Luz roja intermitente?", o: ["Ceda el paso.", "Pare obligatorio.", "Vía libre."], c: 1, l: "Art. 150.3", e: "Equivale a una señal de PARE.", img: "../preguntas/pregunta_11.jpg" },
+                { p: "Uso de claxon prohibido de:", o: ["10 PM a 6 AM", "Todo el día", "Zonas escolares"], c: 0, l: "Art. 189", e: "Restringido en horario nocturno.", img: "../preguntas/pregunta_12.jpg" },
+                { p: "¿Edad para licencia categoría B?", o: ["16 años", "18 años", "21 años"], c: 1, l: "Art. 250", e: "La mayoría de edad (18 años).", img: "../preguntas/pregunta_13.jpg" },
+                { p: "Casco obligatorio para:", o: ["Solo conductor", "Solo en carretera", "Ambos ocupantes"], c: 2, l: "Art. 72.1", e: "Todos en la moto deben usarlo.", img: "../preguntas/pregunta_14.jpg" },
+                { p: "¿Giro en U en túnel o puente?", o: ["Sí", "No", "Solo de día"], c: 1, l: "Art. 91.2", e: "Está prohibido en puentes y túneles.", img: "../preguntas/pregunta_15.jpg" },
+                { p: "Accidente con lesionados:", o: ["Mover auto", "No mover vehículos", "Retirarse"], c: 1, l: "Art. 69", e: "No se altera la posición hasta que llegue la PNR.", img: "../preguntas/pregunta_16.jpg" },
+                { p: "¿Señal triangular orla roja fondo amarillo?", o: ["Peligro", "Obligación", "Información"], c: 0, l: "Art. 159", e: "Indica peligro o precaución.", img: "../preguntas/pregunta_17.jpg" },
+                { p: "Luces de noche en vías oscuras:", o: ["Opcional", "Obligatorio", "Solo niebla"], c: 1, l: "Art. 159", e: "Es obligatorio el alumbrado.", img: "../preguntas/pregunta_18.jpg" },
+                { p: "Velocidad máxima B en autopista:", o: ["80", "90", "100 km/h"], c: 2, l: "Art. 171.1", e: "El límite máximo es 100 km/h.", img: "../preguntas/pregunta_19.jpg" },
+                { p: "Somatón para autos nuevos:", o: ["6 meses", "Anual", "A los 3 años iniciales"], c: 2, l: "Art. 260", e: "Gracia de 3 años, luego cada 2.", img: "../preguntas/pregunta_20.jpg" }
+            ]
+        };
+
+        let currentIdx = 0, score = 0, errores = [];
+
+        function loadQuestion() {
+            const q = quizGratis.questions[currentIdx];
+            document.getElementById('q-num').innerText = currentIdx + 1;
+            document.getElementById('q-text').innerText = q.p;
+            const imgBox = document.getElementById('q-img-box');
+            const imgEl = document.getElementById('q-image');
+            if(q.img) { imgEl.src = q.img; imgBox.style.display = 'block'; }
+            else { imgBox.style.display = 'none'; }
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            document.getElementById('btn-confirm').style.display = 'none';
+            q.o.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => {
+                    document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    window.selected = idx;
+                    document.getElementById('btn-confirm').style.display = 'block';
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function handleNext() {
+            const q = quizGratis.questions[currentIdx];
+            if(window.selected === q.c) score += 5;
+            else errores.push(q);
+            currentIdx++;
+            if(currentIdx < 20) loadQuestion();
+            else mostrarResultados();
+        }
+
+        function mostrarResultados() {
+            const container = document.getElementById('quiz-container');
+            let html = `
+                <div class="results-screen">
+                    <div style="font-size: 4rem;">${score >= 70 ? '🎉' : '📚'}</div>
+                    <h1 style="font-size: 3rem; color: ${score >= 70 ? '#1abc9c' : '#d63031'};">${score} pts</h1>
+                    <h2>${score >= 70 ? '¡Aprobado!' : 'Sigue practicando'}</h2>
+                    <a href="../../index.html" class="btn-purple">VOLVER AL INICIO</a>
+            `;
+            if (errores.length > 0) {
+                html += `<h3 style="text-align:left; margin: 20px 0 10px; border-bottom: 2px solid #ddd; padding-bottom:5px;">Tus errores:</h3>`;
+                errores.forEach(q => {
+                    html += `
+                        <div class="error-card">
+                            <h4>❌ ${q.p}</h4>
+                            <p><strong>Correcta:</strong> ${q.o[q.c]}</p>
+                            <span class="law-tag">📖 ${q.l}</span>
+                        </div>
+                    `;
+                });
+            }
+            container.innerHTML = html + `</div>`;
+            window.scrollTo(0,0);
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

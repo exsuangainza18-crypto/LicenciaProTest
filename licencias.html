@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Licencias y Puntos - LicenciaPro</title>
+  <style>
+    :root { --primary: #6C5CE7; --dark: #2D3436; --light: #F7F9FC; --shadow: 0 4px 15px rgba(0,0,0,0.06); }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background: var(--light); padding: 15px; }
+    .header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; position: sticky; top: 0; background: var(--light); padding: 10px 0; z-index: 10; }
+    .btn-back { background: white; border: 1.5px solid #8e80d4; padding: 10px; border-radius: 12px; width: 45px; height: 45px; cursor: pointer; box-shadow: var(--shadow); font-size: 1.2rem; font-weight: bold; }
+    .title-box h1 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; color: #222; }
+    .title-box p { color: var(--primary); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; }
+    .search-container { position: sticky; top: 65px; background: var(--light); padding-bottom: 12px; z-index: 9; }
+    .search-box { width: 100%; padding: 15px; border-radius: 16px; border: 1.5px solid #ddd; outline: none; font-size: 1rem; box-shadow: var(--shadow); }
+    .art-card { background: white; padding: 20px; border-radius: 18px; margin-bottom: 15px; box-shadow: var(--shadow); border-left: 6px solid #e17055; }
+    .section-tag { background: #fab1a0; color: #d63031; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; margin-bottom: 8px; display: inline-block; text-transform: uppercase; }
+    .art-card h3 { color: #e17055; font-size: 1.05rem; font-weight: 800; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    .art-card p { font-size: 0.95rem; line-height: 1.6; color: #333; text-align: justify; white-space: pre-line; }
+    .no-results { text-align: center; padding: 40px; color: #999; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <button class="btn-back" onclick="window.location.href='../../../../ley109.html'">←</button>
+    <div class="title-box">
+      <p>Categoría 8</p>
+      <h1>Licencias y Puntos</h1>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="searchArt" class="search-box" placeholder="Busca cancelación, novel, puntos..." onkeyup="filterArt()">
+  </div>
+
+  <div id="art-container"></div>
+
+<script>
+  const articulos = [
+    { n: 239, s: "LICENCIA DE CONDUCCIÓN", d: "Para conducir vehículos de motor por las vías públicas es obligatorio poseer la licencia de conducción, que es el único documento oficial válido para ello." },
+    { n: 242, s: "CATEGORÍAS", d: "Las licencias de conducción se clasifican en categorías (A, B, C, D, E, F) según el tipo de vehículo, peso y capacidad de pasajeros." },
+    { n: 250, s: "REQUISITOS", d: "Para obtener la licencia de conducción se requiere tener 18 años de edad (salvo excepciones para ciertas subcategorías de motos), aprobar el examen médico, el teórico de reglas de tránsito y el práctico de conducción." },
+    { n: 284, s: "REEXÁMENES", d: "Los conductores están obligados a someterse a reexámenes médicos, teóricos o prácticos cuando lo determine la autoridad, acumulen la totalidad de los puntos de peligrosidad, o se detecten afectaciones a sus aptitudes psicofísicas." },
+    { n: 288, s: "SUSPENSIÓN", d: "El Ministerio del Interior puede suspender la licencia a los titulares que:\n1) conduzcan bajo efectos del alcohol (0.0 g/l para profesionales y noveles);\n2) se nieguen a realizar las pruebas de alcoholemia;\n3) acumulen infracciones reiteradas o no paguen las multas." },
+    { n: 289, s: "CANCELACIÓN", d: "El Ministerio del Interior dispone la cancelación de la licencia de conducción:\n1) a los titulares que en dos años se les suspenda en más de 3 ocasiones;\n2) a los conductores noveles detectados con alcohol;\n3) a quienes no abonen las multas en la cuantía correspondiente; y\n4) al no aprobar los reexámenes establecidos." },
+    { n: 290, s: "SISTEMA DE PUNTOS", d: "El sistema de puntos penaliza a los conductores por la acumulación de infracciones del tránsito. Las infracciones se clasifican en Muy Peligrosas, Peligrosas y Menos Peligrosas, las cuales acumulan puntos en el expediente del conductor, pudiendo causar la suspensión al alcanzar el límite." }
+  ];
+
+  function loadArts(data) {
+    const container = document.getElementById('art-container');
+    if(data.length === 0) {
+      container.innerHTML = '<div class="no-results">No se encontraron artículos.</div>'; return;
+    }
+    container.innerHTML = data.map(art => `
+      <div class="art-card">
+        <span class="section-tag">${art.s}</span>
+        <h3>ARTÍCULO ${art.n}</h3>
+        <p>${art.d}</p>
+      </div>`).join('');
+  }
+
+  function filterArt() {
+    const q = document.getElementById('searchArt').value.toLowerCase();
+    loadArts(articulos.filter(a => a.d.toLowerCase().includes(q) || a.n.toString().includes(q) || a.s.toLowerCase().includes(q)));
+  }
+
+  loadArts(articulos);
+</script>
+</body>
+</html>
