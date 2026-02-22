@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>LicenciaPro Cuba - Master</title>
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --dark: #333333;
+            --light: #F8FAFC;
+            --shadow-btn: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        
+        body { 
+            background: var(--light); 
+            color: var(--dark); 
+            height: 100vh; 
+            width: 100vw;
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+            -webkit-user-select: none;
+        }
+
+        /* CONTENEDOR PRINCIPAL - DISTRIBUCIÓN PERFECTA */
+        .screen { 
+            display: flex; 
+            flex-direction: column; 
+            padding: 15px 20px; 
+            height: 100%; 
+            width: 100%;
+        }
+
+        /* HEADER */
+        .home-header { text-align: center; margin-bottom: 15px; flex-shrink: 0; }
+        .home-header h1 { font-size: 2.8rem; font-weight: 900; line-height: 1; letter-spacing: -1.5px; color: #1a1a1a; }
+        .home-header p { color: #7f8c8d; font-size: 0.95rem; font-weight: 500; }
+
+        /* BOTONES DE ALTA CALIDAD */
+        .btn-main {
+            width: 100%; border: none; border-radius: 20px; padding: 18px 22px; margin-bottom: 12px;
+            text-align: left; cursor: pointer; color: white; 
+            box-shadow: var(--shadow-btn);
+            flex-shrink: 0; display: flex; flex-direction: column; 
+            position: relative; overflow: hidden;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        
+        /* Efecto de brillo sutil en los botones */
+        .btn-main::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 50%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.15), transparent);
+        }
+
+        .btn-main:active { transform: scale(0.97); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .btn-main h3 { font-size: 1.3rem; font-weight: 800; text-shadow: 0 2px 4px rgba(0,0,0,0.2); z-index: 1; }
+        .btn-main p { font-size: 0.9rem; opacity: 0.9; font-weight: 500; z-index: 1; }
+
+        /* DEGRADADOS MEJORADOS */
+        .btn-pro { background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%); } /* Azul Eléctrico Pro */
+        .btn-dark { background: linear-gradient(135deg, #434343 0%, #000000 100%); } /* Negro Carbono */
+        .btn-law { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); } /* Esmeralda Vibrante */
+
+        .section-title { 
+            font-size: 1.15rem; font-weight: 800; margin: 5px 0 10px; 
+            color: #2c3e50; text-align: center; flex-shrink: 0;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        /* GRID DE SEÑALES - OCUPA EL ESPACIO RESTANTE */
+        .grid-2x2 { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 12px; 
+            flex-grow: 1; 
+            min-height: 0; 
+            margin-bottom: 15px; 
+        }
+        
+        .grid-btn {
+            background: white; border: 1px solid rgba(0,0,0,0.05); border-radius: 22px; 
+            font-weight: 800; font-size: 1rem; color: #2c3e50; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); cursor: pointer;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: all 0.2s; padding: 10px;
+        }
+        
+        .grid-btn:active { transform: scale(0.95); background-color: #f0f3f7; }
+        .grid-icon { font-size: 2.8rem; display: block; margin-bottom: 4px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1)); }
+
+        /* BOTÓN DE ACCIÓN INFERIOR */
+        .btn-purple {
+            background: linear-gradient(135deg, #6C5CE7, #a29bfe); 
+            color: white; border: none; width: 100%; padding: 20px;
+            border-radius: 20px; font-size: 1.15rem; font-weight: 800;
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3); 
+            cursor: pointer; text-transform: uppercase; flex-shrink: 0;
+            margin-bottom: 5px;
+        }
+        .btn-purple:active { transform: translateY(2px); box-shadow: 0 4px 10px rgba(108, 92, 231, 0.2); }
+    </style>
+</head>
+<body>
+
+    <section class="screen">
+        <header class="home-header">
+            <h1>LicenciaPro</h1>
+            <p>Simulador Oficial Ley 109 — Cuba</p>
+        </header>
+
+        <button class="btn-main btn-pro" onclick="window.location.href='pro.html'">
+            <h3>👑 Desbloquear Versión Pro</h3>
+            <p>10 Cuestionarios + Biblioteca Completa</p>
+        </button>
+
+        <button class="btn-main btn-dark" onclick="window.location.href='examenes.html'">
+            <h3>📝 Cuestionarios Oficiales</h3>
+            <p>Toca aquí para seleccionar un test</p>
+        </button>
+
+        <button class="btn-main btn-law" onclick="window.location.href='ley109.html'">
+            <h3>📜 Leer Ley 109 Oficial</h3>
+            <p>Consulta el código de vialidad y tránsito</p>
+        </button>
+
+        <h2 class="section-title">Biblioteca de Señales</h2>
+
+        <div class="grid-2x2">
+            <button class="grid-btn" onclick="window.location.href='assets/documentos/senales/reglamentarias.html'">
+                <span class="grid-icon">🛑</span><span>Reglamentarias</span>
+            </button>
+            <button class="grid-btn" onclick="window.location.href='assets/documentos/senales/preventivas.html'">
+                <span class="grid-icon">⚠️</span><span>Preventivas</span>
+            </button>
+            <button class="grid-btn" onclick="window.location.href='assets/documentos/senales/informativas.html'">
+                <span class="grid-icon">ℹ️</span><span>Informativas</span>
+            </button>
+            <button class="grid-btn" onclick="window.location.href='assets/documentos/senales/prioridad.html'">
+                <span class="grid-icon">⬆️</span><span>Prioridad</span>
+            </button>
+        </div>
+
+        <button class="btn-purple" onclick="window.location.href='assets/simulacros/gratis.html'">
+            📝 INICIAR SIMULACRO GRATIS
+        </button>
+    </section>
+
+</body>
+</html>
